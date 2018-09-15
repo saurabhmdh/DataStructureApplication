@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#1B2443</color>
+    <color name="colorPrimaryDark">#12192e</color>
+    <color name="colorAccent">#52DEB7</color>
+
+
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF4081</color>
+
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Finalized Menu COlor -->
+    <color name="colorTitle1">#ECAD97</color>
+    <color name="colorTitle2">#F67381</color>
+    <color name="colorTitle3">#FFE57373</color>
+    <color name="colorTitle4">#F25292</color>
+    <color name="colorTitle5">#D24CA3</color>
+    <color name="colorTitle6">#9A50A5</color>
+    <color name="colorTitle7">#59569D</color>
+    <color name="colorTitle8">#3B467F</color>
+
+    <color name="bg_fragment">#2A3139</color>
+    <color name="bg_card_view">#323C48</color>
+    <color name="bg_card_view_2">#52DEB7</color>
+
+    <color name="bg_card_view_icon">#5A6875</color>
+    <color name="program_title">#02BCDD</color>
+
+    <color name="tint_white">#64ffffff</color>
+    <color name="tint_bg_card_view_2">#6452deb7</color>
+    <color name="colorPrimaryTint">#ae1b2443</color>
+    <color name="nav_drawer_bg_start_color">#C22844</color>
+    <color name="nav_drawer_bg_end_color">#A55166</color>
+    <color name="nav_drawer_center_color">#FFAB91</color>
+
+
+    <!-- Text Colors -->
+    <color name="primary_text">#FF212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="primary_text_white_100_op">#FFFFFFFF</color>
+    <color name="primary_text_white_70_op">#B3FFFFFF</color>
+    <color name="primary_text_white_20_op">#33FFFFFF</color>
+    <color name="black_20_op">#33000000</color>
+    <color name="disable_text_white_50_op">#80FFFFFF</color>
+    <color name="hint_text_white_50_op">#80FFFFFF</color>
+    <color name="secondary_text_dark">@android:color/secondary_text_dark</color>
+
+    <!-- Question Card Colors -->
+    <color name="question_card_strong_cyan">#00b4d7</color>
+    <color name="question_card_strong_blue">#0093c5</color>
+    <color name="question_card_dark_desaturated_violet">#FF4b2862</color>
+    <color name="question_card_dark_moderate_pink">#FF7b3d67</color>
 </resources>
+
