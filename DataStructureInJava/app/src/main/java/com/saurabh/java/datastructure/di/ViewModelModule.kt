@@ -1,6 +1,6 @@
 package com.saurabh.java.datastructure.di
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import com.saurabh.java.datastructure.viewmodel.DataStructureViewModelFactory
 import dagger.Binds
 import dagger.Module

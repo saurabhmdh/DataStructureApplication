@@ -1,6 +1,6 @@
 package com.saurabh.java.datastructure.util
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.saurabh.java.datastructure.api.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter

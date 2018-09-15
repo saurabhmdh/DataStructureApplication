@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
@@ -15,7 +15,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -26,21 +26,10 @@ android {
     dataBinding {
         enabled = true
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    sourceSets {
-        androidTest.java.srcDirs += "src/test-common/java"
-        test.java.srcDirs += "src/test-common/java"
-    }
+
     lintOptions {
         lintConfig rootProject.file('lint.xml')
     }
-}
-
-jacoco {
-    toolVersion = "0.7.4+"
 }
 
 dependencies {
@@ -84,38 +73,4 @@ dependencies {
 
     androidTestImplementation(deps.arch_core.testing, {
     })
-}
-
-task fullCoverageReport(type: JacocoReport) {
-    dependsOn 'createDebugCoverageReport'
-    dependsOn 'testDebugUnitTest'
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
-                      '**/*Test*.*', 'android/**/*.*',
-                      '**/*_MembersInjector.class',
-                      '**/Dagger*Component.class',
-                      '**/Dagger*Component$Builder.class',
-                      '**/*_*Factory.class',
-                      '**/*ComponentImpl.class',
-                      '**/*SubComponentBuilder.class']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
-
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-    executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ])
-}
-
-// we need all open to run tests which  a we enable only for debug builds.
-project.tasks.whenTaskAdded {
-    if (it.name == "testReleaseUnitTest") {
-        it.enabled = false
-    }
 }

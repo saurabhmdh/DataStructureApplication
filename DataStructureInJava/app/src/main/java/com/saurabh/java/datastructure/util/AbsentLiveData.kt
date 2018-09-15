@@ -1,6 +1,6 @@
 package com.saurabh.java.datastructure.util
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 
 /**
  * Created by saurabh.khare on 2018/06/25.
