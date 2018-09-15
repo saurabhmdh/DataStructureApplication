@@ -8,11 +8,24 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.saurabh.java.datastructure.R
+import com.saurabh.java.datastructure.viewmodel.HomepageViewModel
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_homepage.*
 import kotlinx.android.synthetic.main.app_bar_homepage.*
+import timber.log.Timber
+import javax.inject.Inject
 
-class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +43,16 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val homeVM = ViewModelProviders.of(this, viewModelFactory).get(HomepageViewModel::class.java)
+        homeVM.getAllFaqs().observe(this, Observer {data ->
+            data?.let {
+                for(test in it) {
+                    Timber.i(test.question)
+                }
+            }
+
+        })
     }
 
     override fun onBackPressed() {
@@ -82,4 +105,6 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }
