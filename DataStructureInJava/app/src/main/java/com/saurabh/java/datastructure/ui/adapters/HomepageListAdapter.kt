@@ -7,22 +7,27 @@ import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.RowItemListviewHomeBinding
 import com.saurabh.java.datastructure.vo.Category
-import timber.log.Timber
 
-class HomepageListAdapter(private val dataBindingComponent: FragmentDataBindingComponent) : DataBoundListAdapter<Category, RowItemListviewHomeBinding>() {
+class HomepageListAdapter(
+        private val dataBindingComponent: FragmentDataBindingComponent,
+        private val callback: CategoryClickCallback)
+    : DataBoundListAdapter<Category, RowItemListviewHomeBinding>() {
 
     override fun createBinding(parent: ViewGroup): RowItemListviewHomeBinding{
         val binding = DataBindingUtil
                 .inflate<RowItemListviewHomeBinding>(LayoutInflater.from(parent.context),
                         R.layout.row_item_listview_home, parent, false,
                         dataBindingComponent)
+        binding.llRowContainer.setOnClickListener { _ ->
+            binding.category?.let {category ->
+                callback.onClick(category)
+            }
+        }
         return binding
     }
 
     override fun bind(binding: RowItemListviewHomeBinding, item: Category, isLast: Boolean) {
-        binding.tvTitle.text = item.titleName
-        Timber.i("onBind ${item.titleName} ${item.resTitleColor}")
-        binding.ivGridIcon.setImageResource(item.resDrawable)
+        binding.category = item
     }
 
     override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
@@ -31,5 +36,9 @@ class HomepageListAdapter(private val dataBindingComponent: FragmentDataBindingC
 
     override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
         return oldItem == newItem
+    }
+
+    interface CategoryClickCallback {
+        fun onClick(category: Category)
     }
 }

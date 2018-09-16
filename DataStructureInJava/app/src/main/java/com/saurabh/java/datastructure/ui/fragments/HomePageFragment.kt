@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +14,7 @@ import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
 import com.saurabh.java.datastructure.ui.adapters.HomepageListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
 import com.saurabh.java.datastructure.vo.Category
+import timber.log.Timber
 import java.util.*
 
 
@@ -37,27 +38,40 @@ class HomePageFragment : Fragment() {
 
     private fun setDashboardStyleToList() {
         dataBinding.recyclerviewGrid.layoutManager = GridLayoutManager(activity, 2)
-        this@HomePageFragment.adapter = HomepageListAdapter(dataBindingComponent)
-        dataBinding.recyclerviewGrid.adapter = this@HomePageFragment.adapter
+        this@HomePageFragment.adapter = HomepageListAdapter(dataBindingComponent,
+                object : HomepageListAdapter.CategoryClickCallback{
+                    override fun onClick(category: Category) {
+                        onClickCategory(category)
+                    }
 
+                })
+        dataBinding.recyclerviewGrid.adapter = this@HomePageFragment.adapter
         adapter.replace(getTitleDataList())
+    }
+
+    private fun onClickCategory(category: Category) {
+        if (category.titleId < 7) {
+            Timber.i("Goto Program section")
+        } else {
+            Timber.i("open FAQ section..")
+        }
     }
 
 
     private fun getTitleDataList(): ArrayList<Category> {
         val _beans = ArrayList<Category>()
+        this.context?.let {
+            _beans.add(Category(1, "Linked List", ContextCompat.getColor(this.context!!, R.color.colorTitle1), R.drawable.ic_dashboard_linked_list_24dp))
+            _beans.add(Category(2, "Stack", ContextCompat.getColor(this.context!!, R.color.colorTitle2), R.drawable.ic_dashboard_stack_24dp))
+            _beans.add(Category(3, "Queues", ContextCompat.getColor(this.context!!, R.color.colorTitle3), R.drawable.ic_dashboard_queue_24dp))
 
-        _beans.add(Category(1, "Linked List", R.color.colorTitle1, R.drawable.ic_dashboard_linked_list_24dp))
-        _beans.add(Category(2, "Stack", R.color.colorTitle2, R.drawable.ic_dashboard_stack_24dp))
-        _beans.add(Category(3, "Queues", R.color.colorTitle3, R.drawable.ic_dashboard_queue_24dp))
+            _beans.add(Category(4, "Trees", ContextCompat.getColor(this.context!!, R.color.colorTitle4), R.drawable.ic_dashboard_tree_24dp))
+            _beans.add(Category(5, "Graphs", ContextCompat.getColor(this.context!!, R.color.colorTitle5), R.drawable.ic_dashboard_graph_24dp))
+            _beans.add(Category(6, "Searching", ContextCompat.getColor(this.context!!, R.color.colorTitle6), R.drawable.ic_dashboard_search_code_24dp))
 
-        _beans.add(Category(4, "Trees", R.color.colorTitle4, R.drawable.ic_dashboard_tree_24dp))
-        _beans.add(Category(5, "Graphs", R.color.colorTitle5, R.drawable.ic_dashboard_graph_24dp))
-        _beans.add(Category(6, "Searching", R.color.colorTitle6, R.drawable.ic_dashboard_search_code_24dp))
-
-        _beans.add(Category(7, "Sorting", R.color.colorTitle7, R.drawable.ic_dashboard_sort_24dp))
-        _beans.add(Category(8, "Interview questions", R.color.colorTitle8, R.drawable.ic_dashboard_faq_24dp))
-
+            _beans.add(Category(7, "Sorting", ContextCompat.getColor(this.context!!, R.color.colorTitle7), R.drawable.ic_dashboard_sort_24dp))
+            _beans.add(Category(8, "Interview questions", ContextCompat.getColor(this.context!!, R.color.colorTitle8), R.drawable.ic_dashboard_faq_24dp))
+        }
         return _beans
     }
 }
