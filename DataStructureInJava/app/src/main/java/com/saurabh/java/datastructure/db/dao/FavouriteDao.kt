@@ -5,13 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.saurabh.java.datastructure.db.tables.FAQ
+import com.saurabh.java.datastructure.db.tables.Favourite
+
 
 @Dao
-interface FAQDao {
+interface FavouriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(faq: FAQ)
+    fun insert(fav: Favourite)
 
-    @Query("SELECT * FROM ds_faqs")
-    fun getAllFAQs(): LiveData<List<FAQ>>
+    @Query("DELETE FROM ds_favourite_progs WHERE `id` = :index")
+    fun getData(index: Int): LiveData<Favourite>
 }

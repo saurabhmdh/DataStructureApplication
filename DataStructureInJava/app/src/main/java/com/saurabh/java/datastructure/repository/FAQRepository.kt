@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.db.dao.FAQDao
-import com.saurabh.java.datastructure.db.tables.FAQTable
+import com.saurabh.java.datastructure.db.tables.FAQ
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class FAQRepository @Inject constructor(private val appExecutors: AppExecutors, private val faqDao: FAQDao) {
-    private val mValues: MediatorLiveData<List<FAQTable>> = MediatorLiveData()
+    private val mValues: MediatorLiveData<List<FAQ>> = MediatorLiveData()
 
     @AnyThread
-    fun getFAQs(): LiveData<List<FAQTable>> {
-        appExecutors.diskIO().execute {         val cache: LiveData<List<FAQTable>> = faqDao.getAllFAQs()
+    fun getFAQs(): LiveData<List<FAQ>> {
+        appExecutors.diskIO().execute {         val cache: LiveData<List<FAQ>> = faqDao.getAllFAQs()
             mValues.addSource(cache) { data ->
                 if (data == null || data.isEmpty()) {
                     mValues.postValue(null)

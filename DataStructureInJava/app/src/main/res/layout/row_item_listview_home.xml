@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_item_height"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:id="@+id/ll_row_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_grid_icon"
+                android:layout_width="@dimen/hexagon_icon_width"
+                android:layout_height="@dimen/hexagon_icon_height"
+                android:layout_above="@+id/ll_row_title_container"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/grid_icon_margin_bottom"
+                app:srcCompat="@drawable/ic_launcher" />
+
+            <RelativeLayout
+                android:id="@+id/ll_row_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_list_grid_item_height"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/black_20_op"
+                android:padding="@dimen/grid_item_text_container_padding">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal"
+                    android:text="@string/app_name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/txt_home_grid_item" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

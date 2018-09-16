@@ -1,4 +1,4 @@
-package com.saurabh.java.datastructure.ui.homepage.view
+package com.saurabh.java.datastructure.ui.activities
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.saurabh.java.datastructure.R
+import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
+import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.viewmodel.HomepageViewModel
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -32,17 +34,17 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         setContentView(R.layout.activity_homepage)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        savedInstanceState.let {
+            val fragment = instanceOf<HomePageFragment>()
+            supportFragmentManager.beginTransaction().add(R.id.container_fragment, fragment, fragment.toString()).commit()
+        }
 
         val homeVM = ViewModelProviders.of(this, viewModelFactory).get(HomepageViewModel::class.java)
         homeVM.getAllFaqs().observe(this, Observer {data ->

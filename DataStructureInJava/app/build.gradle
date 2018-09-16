@@ -38,6 +38,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
@@ -62,6 +66,8 @@ dependencies {
     implementation deps.work.runtime_ktx
 
     implementation deps.timber
+
+    implementation deps.ktx.core
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler

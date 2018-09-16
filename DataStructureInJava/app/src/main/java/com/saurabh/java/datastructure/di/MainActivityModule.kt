@@ -1,6 +1,6 @@
 package com.saurabh.java.datastructure.di
 
-import com.saurabh.java.datastructure.ui.homepage.view.Homepage
+import com.saurabh.java.datastructure.ui.activities.Homepage
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

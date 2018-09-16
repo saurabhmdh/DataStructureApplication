@@ -1,20 +1,65 @@
 <resources>
 
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- <style name="TextAppearance.ExpandedToolbar.Headline" parent="TextAppearance.Material.Headline">
+         <item name="textSize">@dimen/text_size_headline_material</item>
+         <item name="fontFamily">@string/font_family_headline_material</item>
+         <item name="textColor">?attr/textColorPrimary</item>
+     </style>-->
+
+    <style name="AppTheme.NavigationView" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorTitle2</item>
+        <item name="colorPrimaryDark">@color/colorTitle2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/bg_card_view</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.BrandedScreen" parent="AppTheme">
+        <!--<item name="android:windowBackground">@drawable/brand_screen_logo</item>-->
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Question Card theme. -->
+    <style name="QuestionCardTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/question_card_dark_desaturated_violet</item>
+        <item name="colorPrimaryDark">@color/question_card_dark_desaturated_violet</item>
+        <item name="colorAccent">@color/question_card_strong_cyan</item>
+        <item name="colorControlHighlight">@color/question_card_strong_cyan</item>
+        <item name="android:textColorPrimary">@color/white</item>
+
+    </style>
+
+    <style name="MaterialDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--dialog background-->
+        <!--<item name="android:windowBackground">@drawable/dialog_material_background</item>-->
+        <item name="android:windowTitleStyle">@style/MaterialDialogTitleTextStyle</item>
+        <item name="android:windowAnimationStyle">@style/AppDialogAnimation</item>
+    </style>
+
+    <style name="MaterialDialogTitleTextStyle">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+    </style>
+
+    <style name="AppDialogAnimation">
+        <!--<item name="android:windowEnterAnimation">@anim/anim_slide_up_normal</item>-->
+        <!--<item name="android:windowExitAnimation">@anim/anim_slide_down_normal</item>-->
+    </style>
 
 </resources>
+

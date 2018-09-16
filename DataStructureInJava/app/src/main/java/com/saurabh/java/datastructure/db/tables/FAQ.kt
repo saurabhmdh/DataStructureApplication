@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity(tableName = "ds_faqs")
 @JvmSuppressWildcards
-class FAQTable (
+class FAQ (
     @PrimaryKey()
     @ColumnInfo(name = "id")
     var _id: Int,
