@@ -14,4 +14,10 @@
     <dimen name="grid_icon_margin_bottom">68dp</dimen>
     <dimen name="txt_home_grid_item">20sp</dimen>
     <dimen name="title_list_grid_item_height">68dp</dimen>
+
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="four_dp">4dp</dimen>
+
 </resources>

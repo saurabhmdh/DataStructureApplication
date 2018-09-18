@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
+import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.ui.adapters.HomepageListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
+import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.vo.Category
 import timber.log.Timber
 import java.util.*
 
 
-class HomePageFragment : Fragment() {
+class HomePageFragment : Fragment(), Injectable {
 
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentHomeBinding>()
@@ -26,25 +28,24 @@ class HomePageFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false, dataBindingComponent)
-        setHasOptionsMenu(true);
         dataBinding = binding
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setDashboardStyleToList()
+        setupGridView()
     }
 
-    private fun setDashboardStyleToList() {
+    private fun setupGridView() {
         dataBinding.recyclerviewGrid.layoutManager = GridLayoutManager(activity, 2)
         this@HomePageFragment.adapter = HomepageListAdapter(dataBindingComponent,
                 object : HomepageListAdapter.CategoryClickCallback{
                     override fun onClick(category: Category) {
                         onClickCategory(category)
                     }
-
                 })
+
         dataBinding.recyclerviewGrid.adapter = this@HomePageFragment.adapter
         adapter.replace(getTitleDataList())
     }
@@ -53,7 +54,8 @@ class HomePageFragment : Fragment() {
         if (category.titleId < 7) {
             Timber.i("Goto Program section")
         } else {
-            Timber.i("open FAQ section..")
+            val fragment = instanceOf<FaqsFragment>()
+            childFragmentManager.beginTransaction().add(R.id.home_fragment_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
         }
     }
 

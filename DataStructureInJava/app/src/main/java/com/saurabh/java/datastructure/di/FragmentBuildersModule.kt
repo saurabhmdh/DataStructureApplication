@@ -1,5 +1,6 @@
 package com.saurabh.java.datastructure.di
 
+import com.saurabh.java.datastructure.ui.fragments.FaqsFragment
 import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -11,4 +12,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeHomePageFragment(): HomePageFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeFaqsFragment(): FaqsFragment
 }
