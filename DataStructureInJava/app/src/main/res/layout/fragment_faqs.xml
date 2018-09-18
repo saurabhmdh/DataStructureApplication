@@ -3,8 +3,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_fragment"
-        android:clickable="true">
+        android:background="@color/accent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_faqs"

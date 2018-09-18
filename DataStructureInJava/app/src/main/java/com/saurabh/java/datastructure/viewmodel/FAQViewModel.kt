@@ -3,10 +3,10 @@ package com.saurabh.java.datastructure.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.saurabh.java.datastructure.db.tables.FAQ
-import javax.inject.Inject
 import com.saurabh.java.datastructure.repository.FAQRepository
+import javax.inject.Inject
 
-class HomepageViewModel @Inject constructor(private val repo: FAQRepository) : ViewModel() {
+class FAQViewModel @Inject constructor(private val repo: FAQRepository) : ViewModel() {
     fun getAllFaqs() : LiveData<List<FAQ>> {
         return repo.getFAQs()
     }

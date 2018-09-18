@@ -3,7 +3,7 @@ package com.saurabh.java.datastructure.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.saurabh.java.datastructure.viewmodel.DataStructureViewModelFactory
-import com.saurabh.java.datastructure.viewmodel.HomepageViewModel
+import com.saurabh.java.datastructure.viewmodel.FAQViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -11,6 +11,7 @@ import dagger.multibindings.IntoMap
 /**
  * Created by saurabh.khare on 2018/06/25.
  */
+@Suppress("unused")
 @Module
 abstract class ViewModelModule {
 
@@ -19,6 +20,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomepageViewModel::class)
-    abstract fun bindHomepageViewModel(homepageViewModel: HomepageViewModel): ViewModel
+    @ViewModelKey(FAQViewModel::class)
+    abstract fun bindHomepageViewModel(homepageViewModel: FAQViewModel): ViewModel
 }

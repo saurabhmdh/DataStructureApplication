@@ -8,6 +8,7 @@ import dagger.android.ContributesAndroidInjector
 /**
  * Created by saurabh.khare on 2018/06/25.
  */
+@Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector

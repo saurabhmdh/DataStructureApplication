@@ -1,5 +1,6 @@
 package com.saurabh.java.datastructure.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
 import com.saurabh.java.datastructure.di.Injectable
+import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
 import com.saurabh.java.datastructure.ui.adapters.HomepageListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
 import com.saurabh.java.datastructure.util.instanceOf
@@ -25,6 +27,14 @@ class HomePageFragment : Fragment(), Injectable {
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentHomeBinding>()
     var adapter by autoCleared<HomepageListAdapter>()
+    lateinit var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is IFragmentLifeCycleEvent) {
+            iFragmentLifeCycleEvent = context
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false, dataBindingComponent)
@@ -55,7 +65,8 @@ class HomePageFragment : Fragment(), Injectable {
             Timber.i("Goto Program section")
         } else {
             val fragment = instanceOf<FaqsFragment>()
-            childFragmentManager.beginTransaction().add(R.id.home_fragment_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
+            iFragmentLifeCycleEvent.pushFragment(fragment)
+            //childFragmentManager.beginTransaction().add(R.id.home_fragment_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
         }
     }
 
