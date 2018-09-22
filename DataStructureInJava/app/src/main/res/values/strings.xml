@@ -1,8 +1,18 @@
 <resources>
-    <string name="app_name">JavaDatastructures</string>
+    <string name="app_name">Data Structures Java</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="linkedlist">Linked List</string>
+    <string name="stack">Stacks</string>
+    <string name="queue">Queues</string>
+    <string name="tree">Trees</string>
+    <string name="graphs">Graphs</string>
+    <string name="searching">Searching</string>
+    <string name="sorting">Sorting</string>
+    <string name="faq">Interview questions</string>
+
 </resources>

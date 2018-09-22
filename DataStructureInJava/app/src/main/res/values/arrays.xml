@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_dir_name">
+        <item>linkedlist</item>
+        <item>stack</item>
+        <item>queue</item>
+        <item>tree</item>
+        <item>graphs</item>
+        <item>searching</item>
+        <item>sorting</item>
+        <item>faq</item>
+    </string-array>
+    <string-array name="array_section_display_name">
+        <item>@string/linkedlist</item>
+        <item>@string/stack</item>
+        <item>@string/queue</item>
+        <item>@string/tree</item>
+        <item>@string/graphs</item>
+        <item>@string/searching</item>
+        <item>@string/sorting</item>
+        <item>@string/faq</item>
+    </string-array>
+    <integer-array name="array_category_logo_drawables">
+        <item>@drawable/ic_dashboard_linked_list_24dp</item>
+        <item>@drawable/ic_dashboard_stack_24dp</item>
+        <item>@drawable/ic_dashboard_queue_24dp</item>
+        <item>@drawable/ic_dashboard_tree_24dp</item>
+        <item>@drawable/ic_dashboard_graph_24dp</item>
+        <item>@drawable/ic_dashboard_search_code_24dp</item>
+        <item>@drawable/ic_dashboard_sort_24dp</item>
+        <item>@drawable/ic_dashboard_faq_24dp</item>
+    </integer-array>
+    <integer-array name="array_category_colors">
+        <item>@color/colorTitle1</item>
+        <item>@color/colorTitle2</item>
+        <item>@color/colorTitle3</item>
+        <item>@color/colorTitle4</item>
+        <item>@color/colorTitle5</item>
+        <item>@color/colorTitle6</item>
+        <item>@color/colorTitle7</item>
+        <item>@color/colorTitle8</item>
+    </integer-array>
+</resources>
