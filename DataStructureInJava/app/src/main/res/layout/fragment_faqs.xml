@@ -3,10 +3,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/accent">
+        android:background="@color/black">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_faqs"
+            android:id="@+id/recyclerview_faqs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/five_dp"

@@ -39,8 +39,7 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         nav_view.setNavigationItemSelectedListener(this)
 
         savedInstanceState.let {
-            val fragment = instanceOf<HomePageFragment>()
-            supportFragmentManager.beginTransaction().add(R.id.container_fragment, fragment, fragment.toString()).commit()
+            pushFragment(instanceOf<HomePageFragment>())
         }
 
 
@@ -50,9 +49,7 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            if (supportFragmentManager.backStackEntryCount > 0) {
-               popFragment()
-            } else {
+            if (!popFragment()) {
                 super.onBackPressed()
             }
         }
@@ -107,8 +104,12 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         supportFragmentManager.beginTransaction().add(R.id.container_fragment, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
     }
 
-    override fun popFragment() {
-        supportFragmentManager.popBackStack()
+    override fun popFragment(): Boolean {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+            return true
+        }
+        return false
     }
 
 }

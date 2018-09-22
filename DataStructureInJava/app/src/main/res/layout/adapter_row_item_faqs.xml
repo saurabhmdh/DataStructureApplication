@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="java.lang.String" />
+        <variable
+            name="FaqsBean"
+            type="com.saurabh.java.datastructure.db.tables.FAQ" />
+
+    </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/faq_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/five_dp"
+        android:layout_marginBottom="@dimen/five_dp"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:layout_marginRight="@dimen/ten_dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardBackgroundColor="@color/bg_card_view"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius"
+        card_view:cardElevation="@dimen/cardview_default_elevation"
+        card_view:cardUseCompatPadding="true"
+        android:focusable="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_card_view">
+
+            <LinearLayout
+                android:id="@+id/ll_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/faq_list_item_height"
+                android:gravity="center|center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_faqs_id"
+                    android:layout_width="@dimen/faq_id_icon_width"
+                    android:layout_height="@dimen/faq_id_icon_height"
+                    android:layout_margin="@dimen/ten_dp"
+                    android:background="@drawable/shape_circle"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(FaqsBean._id)}"
+                    android:textColor="@color/primary_text_white_100_op" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_faqs_question"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center|start"
+                    android:padding="@dimen/two_dp"
+                    android:text="@{FaqsBean.question}"
+                    android:textColor="@color/primary_text_white_100_op"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/faq_question_txt_size" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_more_or_less"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="@dimen/ten_dp"
+                    app:srcCompat="@drawable/ic_down_arrow" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_main_content"
+                android:orientation="vertical"
+                app:visibleGone="@{FaqsBean.isOpen == 1}">
+
+                <View
+                    android:id="@+id/view_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/quater_dp"
+                    android:background="@color/bg_fragment" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_faqs_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start|center"
+                    android:padding="@dimen/ten_dp"
+                    android:text="@{FaqsBean.answer}"
+                    android:textColor="@color/primary_text_white_70_op"
+                    android:textSize="@dimen/faq_answer_txt_size" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

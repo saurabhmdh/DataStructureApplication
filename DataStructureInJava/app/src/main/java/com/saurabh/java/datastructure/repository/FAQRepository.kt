@@ -15,16 +15,22 @@ class FAQRepository @Inject constructor(private val appExecutors: AppExecutors, 
 
     @AnyThread
     fun getFAQs(): LiveData<List<FAQ>> {
-        val cache: LiveData<List<FAQ>> = faqDao.getAllFAQs()
-        mValues.addSource(cache) { data ->
-            if (data == null || data.isEmpty()) {
-                mValues.postValue(null)
-            } else {
-                mValues.removeSource(cache)
-                mValues.postValue(data)
-            }
+//        val cache: LiveData<List<FAQ>> = faqDao.getAllFAQs()
+//        mValues.addSource(cache) { data ->
+//            if (data == null || data.isEmpty()) {
+//                mValues.postValue(null)
+//            } else {
+//                mValues.removeSource(cache)
+//                mValues.postValue(data)
+//            }
+//
+//        }
+        return faqDao.getAllFAQs()
+    }
 
+    fun update(faq: FAQ) {
+        appExecutors.diskIO().execute {
+            faqDao.update(faq)
         }
-        return mValues
     }
 }

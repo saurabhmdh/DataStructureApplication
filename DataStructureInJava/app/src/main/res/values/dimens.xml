@@ -15,9 +15,17 @@
     <dimen name="txt_home_grid_item">20sp</dimen>
     <dimen name="title_list_grid_item_height">68dp</dimen>
 
+    <dimen name="quater_dp">1dp</dimen>
     <dimen name="two_dp">2dp</dimen>
     <dimen name="ten_dp">10dp</dimen>
     <dimen name="five_dp">5dp</dimen>
     <dimen name="four_dp">4dp</dimen>
 
+    <!-- Adapter FAQ Start -->
+    <dimen name="faq_list_item_height">150dp</dimen>
+    <dimen name="faq_id_icon_height">38dp</dimen>
+    <dimen name="faq_id_icon_width">38dp</dimen>
+    <dimen name="faq_question_txt_size">16sp</dimen>
+    <dimen name="faq_answer_txt_size">16sp</dimen>
+    <!-- Adapter FAQ End -->
 </resources>

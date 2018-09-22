@@ -4,5 +4,5 @@ import androidx.fragment.app.Fragment
 
 interface IFragmentLifeCycleEvent {
     fun pushFragment(fragment: Fragment)
-    fun popFragment()
+    fun popFragment(): Boolean
 }

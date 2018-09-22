@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
@@ -20,6 +21,7 @@ import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.vo.Category
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
 
 class HomePageFragment : Fragment(), Injectable {
@@ -28,6 +30,9 @@ class HomePageFragment : Fragment(), Injectable {
     var dataBinding by autoCleared<FragmentHomeBinding>()
     var adapter by autoCleared<HomepageListAdapter>()
     lateinit var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent
+
+    @Inject
+    lateinit var appExecutors: AppExecutors
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -49,7 +54,7 @@ class HomePageFragment : Fragment(), Injectable {
 
     private fun setupGridView() {
         dataBinding.recyclerviewGrid.layoutManager = GridLayoutManager(activity, 2)
-        this@HomePageFragment.adapter = HomepageListAdapter(dataBindingComponent,
+        this@HomePageFragment.adapter = HomepageListAdapter(dataBindingComponent,appExecutors,
                 object : HomepageListAdapter.CategoryClickCallback{
                     override fun onClick(category: Category) {
                         onClickCategory(category)
@@ -57,7 +62,7 @@ class HomePageFragment : Fragment(), Injectable {
                 })
 
         dataBinding.recyclerviewGrid.adapter = this@HomePageFragment.adapter
-        adapter.replace(getTitleDataList())
+        adapter.submitList(getTitleDataList())
     }
 
     private fun onClickCategory(category: Category) {
@@ -66,7 +71,6 @@ class HomePageFragment : Fragment(), Injectable {
         } else {
             val fragment = instanceOf<FaqsFragment>()
             iFragmentLifeCycleEvent.pushFragment(fragment)
-            //childFragmentManager.beginTransaction().add(R.id.home_fragment_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
         }
     }
 

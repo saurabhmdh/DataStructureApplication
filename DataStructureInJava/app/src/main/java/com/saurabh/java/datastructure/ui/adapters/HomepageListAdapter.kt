@@ -3,20 +3,34 @@ package com.saurabh.java.datastructure.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
-import com.saurabh.java.datastructure.databinding.RowItemListviewHomeBinding
+import com.saurabh.java.datastructure.databinding.AdapterRowItemListviewHomeBinding
 import com.saurabh.java.datastructure.vo.Category
 
 class HomepageListAdapter(
         private val dataBindingComponent: FragmentDataBindingComponent,
+        private val appExecutors: AppExecutors,
         private val callback: CategoryClickCallback)
-    : DataBoundListAdapter<Category, RowItemListviewHomeBinding>() {
+    : DataBoundListAdapter<Category, AdapterRowItemListviewHomeBinding>(
+        appExecutors = appExecutors,
+        diffCallback = object : DiffUtil.ItemCallback<Category>() {
+            override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+                return oldItem.equals(newItem)
+            }
 
-    override fun createBinding(parent: ViewGroup): RowItemListviewHomeBinding{
+            override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
+                return oldItem.equals(newItem)
+            }
+
+        }) {
+
+    override fun createBinding(parent: ViewGroup): AdapterRowItemListviewHomeBinding{
         val binding = DataBindingUtil
-                .inflate<RowItemListviewHomeBinding>(LayoutInflater.from(parent.context),
-                        R.layout.row_item_listview_home, parent, false,
+                .inflate<AdapterRowItemListviewHomeBinding>(LayoutInflater.from(parent.context),
+                        R.layout.adapter_row_item_listview_home, parent, false,
                         dataBindingComponent)
         binding.llRowContainer.setOnClickListener { _ ->
             binding.category?.let {category ->
@@ -26,16 +40,8 @@ class HomepageListAdapter(
         return binding
     }
 
-    override fun bind(binding: RowItemListviewHomeBinding, item: Category, isLast: Boolean) {
+    override fun bind(binding: AdapterRowItemListviewHomeBinding, item: Category, position: Int) {
         binding.category = item
-    }
-
-    override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-        return oldItem.equals(newItem)
-    }
-
-    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
-        return oldItem == newItem
     }
 
     interface CategoryClickCallback {
