@@ -20,12 +20,14 @@ import com.saurabh.java.datastructure.ui.adapters.FAQsListAdapter
 import com.saurabh.java.datastructure.ui.adapters.FaqsObjectAdapter
 import com.saurabh.java.datastructure.util.autoCleared
 import com.saurabh.java.datastructure.viewmodel.FAQViewModel
+import com.saurabh.java.datastructure.vo.ActionbarItem
 
 
 import java.util.ArrayList
 import javax.inject.Inject
 
-class FaqsFragment : Fragment(), Injectable {
+class FaqsFragment : BaseFragment(), Injectable {
+
 
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentFaqsBinding>()
@@ -45,7 +47,6 @@ class FaqsFragment : Fragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupUIComponents()
         setupListView()
         setupViewModel()
     }
@@ -60,8 +61,9 @@ class FaqsFragment : Fragment(), Injectable {
         })
     }
 
-    private fun setupUIComponents() {
-        activity?.title = "Interview questions"
+
+    override fun getTitle(): ActionbarItem {
+        return ActionbarItem("Interview questions", R.drawable.ic_dashboard_faq_24dp)
     }
 
     private fun setupListView() {

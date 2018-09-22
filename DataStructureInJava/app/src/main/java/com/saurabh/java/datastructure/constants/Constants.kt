@@ -1,6 +1,7 @@
 package com.saurabh.java.datastructure.constants
 
 object Constants {
-    var KEY_SECTION_ID = "section_id"
-    var KEY_SECTION_NAME = "section_name"
+    const val BUNDLE_KEY = "bundle_id"
+    const val BUNDLE_OBJECT = "bundle_object"
+    const val EMPTY_STRING = ""
 }

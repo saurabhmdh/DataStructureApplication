@@ -7,21 +7,26 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.saurabh.java.datastructure.R
+import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
 import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
+import com.saurabh.java.datastructure.ui.fragments.BaseFragment
 import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
 import com.saurabh.java.datastructure.util.instanceOf
+import com.saurabh.java.datastructure.vo.ActionbarItem
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_homepage.*
 import javax.inject.Inject
 
 class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector,
-        IFragmentLifeCycleEvent {
+        IFragmentLifeCycleEvent, IActionBarTitleHandler {
+
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -52,7 +57,7 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             if (!popFragment()) {
-                super.onBackPressed()
+                finish()
             }
         }
     }
@@ -107,14 +112,30 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun popFragment(): Boolean {
-        if (supportFragmentManager.backStackEntryCount > 0) {
+        if (supportFragmentManager.backStackEntryCount > 1) { //Don't remove homepage fragment
+            val fragment = supportFragmentManager.fragments[supportFragmentManager.backStackEntryCount - 2]
+            fragment as BaseFragment
+            val item: ActionbarItem = fragment.getTitle()
             supportFragmentManager.popBackStack()
+            updateActionBarTitle(item)
+            val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
+            appBarLayout.setExpanded(false)
             return true
         }
         return false
     }
 
-    fun setTootbarTitle(title: String) {
+    private fun setTootbarTitle(title: String) {
+        val collapseToolbar =  findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
+        collapseToolbar.title = title
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
+        appBarLayout.setExpanded(true)
+    }
 
+    override fun updateActionBarTitle(item: ActionbarItem) {
+        setTootbarTitle(item.title)
+        if (item.categoryIcon != 0) {
+            findViewById<AppCompatImageView>(R.id.iv_category_logo).setImageResource(item.categoryIcon)
+        }
     }
 }
