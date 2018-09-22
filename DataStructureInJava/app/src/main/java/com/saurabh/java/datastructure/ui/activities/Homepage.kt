@@ -7,8 +7,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.AppBarLayout
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
 import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
@@ -16,7 +18,6 @@ import com.saurabh.java.datastructure.util.instanceOf
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_homepage.*
-import kotlinx.android.synthetic.main.app_bar_homepage.*
 import javax.inject.Inject
 
 class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector,
@@ -29,20 +30,21 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
+        setupToolbar()
+        pushFragment(instanceOf<HomePageFragment>())
+    }
+
+    private fun setupToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
+        appBarLayout.setExpanded(true)
         nav_view.setNavigationItemSelectedListener(this)
-
-        savedInstanceState.let {
-            pushFragment(instanceOf<HomePageFragment>())
-        }
-
-
     }
 
     override fun onBackPressed() {
@@ -101,7 +103,7 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     override fun pushFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.container_fragment, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction().add(R.id.main_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
     }
 
     override fun popFragment(): Boolean {
@@ -112,4 +114,7 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         return false
     }
 
+    fun setTootbarTitle(title: String) {
+
+    }
 }

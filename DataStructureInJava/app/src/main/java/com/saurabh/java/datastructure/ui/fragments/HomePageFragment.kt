@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
+import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
 import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
@@ -67,11 +68,17 @@ class HomePageFragment : Fragment(), Injectable {
 
     private fun onClickCategory(category: Category) {
         if (category.titleId < 7) {
-            Timber.i("Goto Program section")
+            gotoSection(category)
         } else {
             val fragment = instanceOf<FaqsFragment>()
             iFragmentLifeCycleEvent.pushFragment(fragment)
         }
+    }
+
+    private fun gotoSection(category: Category) {
+        val fragment = instanceOf<ProgramsFragment>(Pair(Constants.KEY_SECTION_ID, category.titleId),
+                Pair(Constants.KEY_SECTION_NAME, category.titleName))
+        iFragmentLifeCycleEvent.pushFragment(fragment)
     }
 
 

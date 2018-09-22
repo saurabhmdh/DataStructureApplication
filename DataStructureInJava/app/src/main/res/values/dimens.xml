@@ -20,6 +20,7 @@
     <dimen name="ten_dp">10dp</dimen>
     <dimen name="five_dp">5dp</dimen>
     <dimen name="four_dp">4dp</dimen>
+    <dimen name="six_dp">6dp</dimen>
 
     <!-- Adapter FAQ Start -->
     <dimen name="faq_list_item_height">150dp</dimen>
@@ -28,4 +29,12 @@
     <dimen name="faq_question_txt_size">16sp</dimen>
     <dimen name="faq_answer_txt_size">16sp</dimen>
     <!-- Adapter FAQ End -->
+
+    <!-- Actionbar Start-->
+    <dimen name="detail_backdrop_height">256dp</dimen>
+    <dimen name="category_icon_container_height">100dp</dimen>
+    <dimen name="category_icon_container_width">100dp</dimen>
+    <dimen name="category_icon_width">48dp</dimen>
+    <dimen name="category_icon_height">48dp</dimen>
+    <!-- Actionbar End-->
 </resources>
