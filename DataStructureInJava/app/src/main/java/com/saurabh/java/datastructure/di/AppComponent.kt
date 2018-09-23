@@ -2,6 +2,7 @@ package com.saurabh.java.datastructure.di
 
 import android.app.Application
 import com.saurabh.java.datastructure.DataStructureApplication
+import com.saurabh.java.datastructure.util.services.BackGroundWorker
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -28,4 +29,5 @@ interface AppComponent {
     }
 
     fun inject(app: DataStructureApplication)
+    fun inject(worker: BackGroundWorker)
 }

@@ -3,7 +3,7 @@ package com.saurabh.java.datastructure.util
 import android.app.Application
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.vo.Category
-import java.util.ArrayList
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -46,5 +46,9 @@ class LookupTable @Inject constructor(var application: Application) {
             data.add(v)
         }
         return data
+    }
+
+    fun getAllCategoriesName(): List<String> {
+        return application.resources.getStringArray(R.array.array_dir_name).asList()
     }
 }

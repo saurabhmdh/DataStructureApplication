@@ -24,16 +24,4 @@ data class FAQ (
 
     @ColumnInfo(name = "is_open")
     var isOpen: Int
-) : Parcelable {
-    override fun equals(other: Any?): Boolean {
-        return false
-//        if (this === other) return true
-//        if (other?.javaClass != javaClass) return false
-//        other as FAQ
-//        return this._id == other._id
-//                && this.question.equals(other.question)
-//                && this.answer.equals(other.answer)
-//                && this.favourite == other.favourite
-//                && this.isOpen == other.isOpen
-    }
-}
+) : Parcelable
