@@ -21,6 +21,7 @@
     <dimen name="five_dp">5dp</dimen>
     <dimen name="four_dp">4dp</dimen>
     <dimen name="six_dp">6dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
 
     <!-- Adapter FAQ Start -->
     <dimen name="faq_list_item_height">150dp</dimen>
@@ -37,4 +38,11 @@
     <dimen name="category_icon_width">48dp</dimen>
     <dimen name="category_icon_height">48dp</dimen>
     <!-- Actionbar End-->
+
+    <!-- Program adapter start -->
+    <dimen name="activity_horizontal_margin_half">8dp</dimen>
+    <dimen name="list_item_height">110dp</dimen>
+    <dimen name="txt_home_list_item">20sp</dimen>
+    <dimen name="cardview_icon_row_height">40dp</dimen>
+    <!-- Program adapter end -->
 </resources>

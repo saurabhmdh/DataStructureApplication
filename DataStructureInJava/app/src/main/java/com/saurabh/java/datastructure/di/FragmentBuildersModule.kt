@@ -1,5 +1,6 @@
 package com.saurabh.java.datastructure.di
 
+import com.saurabh.java.datastructure.ui.fragments.DisplayProgramFragment
 import com.saurabh.java.datastructure.ui.fragments.FaqsFragment
 import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
 import com.saurabh.java.datastructure.ui.fragments.ProgramsFragment
@@ -20,4 +21,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeProgramsFragment(): ProgramsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeDisplayProgramFragment(): DisplayProgramFragment
 }
