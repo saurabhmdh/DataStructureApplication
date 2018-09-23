@@ -6,7 +6,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 object DatabaseCopier {
-    private val bufferLength : Int = 8192
+    private const val bufferLength : Int = 8192
      fun copyAttachedDatabase(context: Context, databaseName: String) {
         val dbPath = context.getDatabasePath(databaseName)
 
@@ -20,7 +20,7 @@ object DatabaseCopier {
 
         // Try to copy database file
         try {
-            val inputStream = context.getAssets().open("databases/$databaseName")
+            val inputStream = context.assets.open("databases/$databaseName")
             val output = FileOutputStream(dbPath)
 
             val buffer = ByteArray(bufferLength)

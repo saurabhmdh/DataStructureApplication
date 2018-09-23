@@ -9,8 +9,8 @@ import com.saurabh.java.datastructure.vo.ActionbarItem
 
 abstract class BaseFragment : Fragment() {
 
-    lateinit var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent
-    lateinit var iActionBarTitleHandler: IActionBarTitleHandler
+    private lateinit var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent
+    private lateinit var iActionBarTitleHandler: IActionBarTitleHandler
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

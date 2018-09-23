@@ -3,7 +3,6 @@ package com.saurabh.java.datastructure.db.tables
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.saurabh.java.datastructure.constants.Constants
 import kotlinx.android.parcel.IgnoredOnParcel

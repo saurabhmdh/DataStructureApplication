@@ -1,7 +1,6 @@
 package com.saurabh.java.datastructure.ui.adapters;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -29,7 +29,7 @@ class HomePageFragment : BaseFragment(), Injectable {
 
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentHomeBinding>()
-    var adapter by autoCleared<HomepageListAdapter>()
+    private var adapter by autoCleared<HomepageListAdapter>()
 
     @Inject
     lateinit var appExecutors: AppExecutors

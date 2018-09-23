@@ -23,7 +23,7 @@ class FAQsListAdapter(
             }
 
             override fun areContentsTheSame(oldItem: FAQ, newItem: FAQ): Boolean {
-                return oldItem.equals(newItem)
+                return oldItem == newItem
             }
 
         }

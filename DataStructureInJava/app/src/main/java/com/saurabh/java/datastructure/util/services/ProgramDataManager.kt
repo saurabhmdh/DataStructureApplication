@@ -10,7 +10,7 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
-class ProgramDataManager (val dao: ProgramDao, val lookupTable: LookupTable, val context: Context) {
+class ProgramDataManager (val dao: ProgramDao, private val lookupTable: LookupTable, val context: Context) {
 
     init {
         start()

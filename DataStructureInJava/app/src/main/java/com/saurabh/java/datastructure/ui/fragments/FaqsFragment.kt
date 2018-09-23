@@ -31,8 +31,8 @@ class FaqsFragment : BaseFragment(), Injectable {
 
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentFaqsBinding>()
-    var adapter by autoCleared<FaqsObjectAdapter>()
-    lateinit var faqVM : FAQViewModel
+    private var adapter by autoCleared<FaqsObjectAdapter>()
+    private lateinit var faqVM : FAQViewModel
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
