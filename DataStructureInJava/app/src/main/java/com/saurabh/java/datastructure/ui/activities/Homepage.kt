@@ -1,5 +1,8 @@
 package com.saurabh.java.datastructure.ui.activities
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -16,9 +19,6 @@ import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
 import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
-import com.saurabh.java.datastructure.ui.fragments.BaseFragment
-import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
-import com.saurabh.java.datastructure.ui.fragments.ProgramsFragment
 import com.saurabh.java.datastructure.util.LookupTable
 import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.vo.ActionbarItem
@@ -27,6 +27,8 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_homepage.*
 import javax.inject.Inject
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.saurabh.java.datastructure.ui.fragments.*
+import timber.log.Timber
 
 
 class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector,
@@ -88,8 +90,10 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_item_home -> {
-                //TODO: Need to check before push
                 handleHomePageFragment()
+            }
+            R.id.navigation_item_faqs -> {
+                pushFragment(instanceOf<FaqsFragment>())
             }
             R.id.navigation_item_favourite -> {
                 //TODO: write code for fav fragment
@@ -114,6 +118,12 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             }
             R.id.navigation_item_sorting -> {
                 launchFragment(6)
+            }
+            R.id.navigation_item_support -> {
+                showFeedbackDialog()
+            }
+            R.id.navigation_item_rate_us -> {
+                showRateThisAppDialog()
             }
         }
 
@@ -175,4 +185,45 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val behavior = (abl.layoutParams as CoordinatorLayout.LayoutParams).behavior
         return if (behavior is AppBarLayout.Behavior) behavior.topAndBottomOffset == 0 else false
     }
+
+    private fun showFeedbackDialog() {
+        val dialog = GenericDialogFragment()
+        dialog.title = getString(R.string.dialog_title_feedback)
+        dialog.msg = getString(R.string.dialog_message_feedback)
+        dialog.okText = getString(R.string.feedback)
+        dialog.onOkClickListener = DialogInterface.OnClickListener { popup, _ ->
+            startFeedBackEmailIntent()
+            popup.dismiss()
+        }
+        dialog.cancelText = getString(R.string.later)
+        dialog.onCancelClickListener = DialogInterface.OnClickListener { popup, _ ->
+            popup.dismiss()
+        }
+        dialog.show(supportFragmentManager, "showFeedbackDialog")
+    }
+
+    private fun startFeedBackEmailIntent() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val data = Uri.parse("mailto:saurabhmdh@gmail.com?subject=" + getString(R.string.support_and_feedback))
+        intent.data = data
+        startActivity(intent)
+    }
+
+    private fun showRateThisAppDialog() {
+        val dialog = GenericDialogFragment()
+        dialog.title = getString(R.string.dialog_title_rate_this_app)
+        dialog.msg = getString(R.string.dialog_message_rate_this_app)
+        dialog.okText = getString(R.string.google_play)
+        dialog.onOkClickListener = DialogInterface.OnClickListener { popup, _ ->
+            val appPackageName = packageName
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            popup.dismiss()
+        }
+        dialog.cancelText = getString(R.string.later)
+        dialog.onCancelClickListener = DialogInterface.OnClickListener { popup, _ ->
+            popup.dismiss()
+        }
+        dialog.show(supportFragmentManager, "showRateThisAppDialog")
+    }
+
 }

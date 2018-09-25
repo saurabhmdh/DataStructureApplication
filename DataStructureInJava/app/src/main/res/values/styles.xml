@@ -46,7 +46,7 @@
         <!--title and message color-->
         <item name="android:textColorPrimary">@android:color/white</item>
         <!--dialog background-->
-        <!--<item name="android:windowBackground">@drawable/dialog_material_background</item>-->
+        <item name="android:windowBackground">@drawable/dialog_material_background</item>
         <item name="android:windowTitleStyle">@style/MaterialDialogTitleTextStyle</item>
         <item name="android:windowAnimationStyle">@style/AppDialogAnimation</item>
     </style>
@@ -57,8 +57,8 @@
     </style>
 
     <style name="AppDialogAnimation">
-        <!--<item name="android:windowEnterAnimation">@anim/anim_slide_up_normal</item>-->
-        <!--<item name="android:windowExitAnimation">@anim/anim_slide_down_normal</item>-->
+        <item name="android:windowEnterAnimation">@anim/anim_slide_up_normal</item>
+        <item name="android:windowExitAnimation">@anim/anim_slide_down_normal</item>
     </style>
 
 </resources>

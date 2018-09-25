@@ -24,4 +24,15 @@
     <string name="rate_us">Rate This App</string>
 
     <string name="username">Saurabh Khare</string>
+
+
+    <string name="dialog_title_feedback">Contact us</string>
+    <string name="dialog_message_feedback">What can we improve? Your feedback is always welcome.</string>
+    <string name="later">Later</string>
+    <string name="feedback">Feedback</string>
+
+
+    <string name="dialog_title_rate_this_app">Awesome ;)</string>
+    <string name="dialog_message_rate_this_app"><![CDATA[Glad to see you like this app. If you\'re up for it, we would really appreciate you rating & reviewing us.]]></string>
+    <string name="google_play">GOOGLE PLAY</string>
 </resources>
