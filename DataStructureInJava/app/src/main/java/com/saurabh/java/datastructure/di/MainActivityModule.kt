@@ -1,6 +1,7 @@
 package com.saurabh.java.datastructure.di
 
 import com.saurabh.java.datastructure.ui.activities.Homepage
+import com.saurabh.java.datastructure.ui.activities.QuestionCardActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,4 +14,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class MainActivityModule {
     @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     abstract fun contributeMainActivity(): Homepage
+
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    abstract fun contributeQuestionCardActivity(): QuestionCardActivity
 }

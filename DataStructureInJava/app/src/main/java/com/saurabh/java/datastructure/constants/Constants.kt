@@ -7,4 +7,6 @@ object Constants {
     const val EMPTY_STRING = ""
     const val KEY_FIRST_LAUNCH = "key_first_launch"
     const val BUNDLE_OBJECT_PROGRAM = "bundle_program"
+
+    const val BUNDLE_POSITION = "bundle_position"
 }

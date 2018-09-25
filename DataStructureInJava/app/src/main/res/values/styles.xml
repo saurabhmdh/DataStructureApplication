@@ -61,5 +61,6 @@
         <item name="android:windowExitAnimation">@anim/anim_slide_down_normal</item>
     </style>
 
+
 </resources>
 

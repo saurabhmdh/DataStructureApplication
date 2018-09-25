@@ -6,6 +6,7 @@ import androidx.work.Worker
 import com.saurabh.java.datastructure.DataStructureApplication
 import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.db.dao.ProgramDao
+import com.saurabh.java.datastructure.db.sqlasset.DatabaseCopier
 import com.saurabh.java.datastructure.di.DaggerAppComponent
 import com.saurabh.java.datastructure.util.LookupTable
 import com.saurabh.java.datastructure.util.PrefManager
@@ -35,6 +36,8 @@ class BackGroundWorker : Worker() {
         if (prefManager.getValue(Constants.KEY_FIRST_LAUNCH).isNullOrBlank()) {
             //First launch so need to populate database.
             ProgramDataManager(dao, lookupTable, applicationContext)
+            val name = "ds_droid.db"
+            DatabaseCopier.copyAttachedDatabase(applicationContext, name)
             prefManager.setValue(Constants.KEY_FIRST_LAUNCH, "1")
         }
 

@@ -1,6 +1,7 @@
 package com.saurabh.java.datastructure.ui.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.saurabh.java.datastructure.R;
+import com.saurabh.java.datastructure.constants.Constants;
 import com.saurabh.java.datastructure.db.tables.FAQ;
+import com.saurabh.java.datastructure.ui.activities.QuestionCardActivity;
 
 import java.util.List;
 
@@ -108,12 +111,11 @@ public class FaqsObjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-//    private void launchQuestionCardActivity(int position) {
-//        Intent quesCardIntent = new Intent(mContext, QuestionCardActivity.class);
-//        quesCardIntent.putExtra(QuestionCardActivity.KEY_QUESTION_POSITION, position);
-//        //quesCardIntent.putParcelableArrayListExtra(QuestionCardActivity.KEY_QUESTION_PARCEL, mRecyclerViewItems);
-//        mContext.startActivity(quesCardIntent);
-//    }
+    private void launchQuestionCardActivity(int position) {
+        Intent quesCardIntent = new Intent(mContext, QuestionCardActivity.class);
+        quesCardIntent.putExtra(Constants.BUNDLE_POSITION, position);
+        mContext.startActivity(quesCardIntent);
+    }
 
     public class FaqItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -154,7 +156,7 @@ public class FaqsObjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     ivMoreOrLess.setImageResource(R.drawable.ic_up_arrow);
                 }
             } else if (v.getId() == R.id.faq_card_view) {
-//                launchQuestionCardActivity(position);
+                launchQuestionCardActivity(position);
             }
         }
     }

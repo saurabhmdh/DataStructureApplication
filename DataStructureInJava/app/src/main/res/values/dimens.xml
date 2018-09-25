@@ -45,4 +45,6 @@
     <dimen name="txt_home_list_item">20sp</dimen>
     <dimen name="cardview_icon_row_height">40dp</dimen>
     <!-- Program adapter end -->
+
+    <dimen name="cardview_app_corner_radius">5dp</dimen>
 </resources>

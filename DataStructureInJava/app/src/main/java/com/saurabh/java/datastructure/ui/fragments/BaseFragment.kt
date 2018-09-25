@@ -9,8 +9,8 @@ import com.saurabh.java.datastructure.vo.ActionbarItem
 
 abstract class BaseFragment : Fragment() {
 
-    private lateinit var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent
-    private lateinit var iActionBarTitleHandler: IActionBarTitleHandler
+    private var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent? = null
+    private var iActionBarTitleHandler: IActionBarTitleHandler? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -23,7 +23,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun pushFragment(fragment: Fragment) {
-        iFragmentLifeCycleEvent.pushFragment(fragment)
+        iFragmentLifeCycleEvent?.pushFragment(fragment)
     }
 
     abstract fun getTitle() : ActionbarItem
@@ -31,6 +31,6 @@ abstract class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val item: ActionbarItem = getTitle()
-        iActionBarTitleHandler.updateActionBarTitle(item)
+        iActionBarTitleHandler?.updateActionBarTitle(item)
     }
 }
