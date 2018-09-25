@@ -13,16 +13,21 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.saurabh.java.datastructure.R
+import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
 import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
 import com.saurabh.java.datastructure.ui.fragments.BaseFragment
 import com.saurabh.java.datastructure.ui.fragments.HomePageFragment
+import com.saurabh.java.datastructure.ui.fragments.ProgramsFragment
+import com.saurabh.java.datastructure.util.LookupTable
 import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.vo.ActionbarItem
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_homepage.*
 import javax.inject.Inject
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+
 
 class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector,
         IFragmentLifeCycleEvent, IActionBarTitleHandler {
@@ -31,6 +36,8 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
+    @Inject
+    lateinit var lookupTable: LookupTable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,30 +86,47 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.navigation_item_home -> {
+                //TODO: Need to check before push
+                handleHomePageFragment()
             }
-            R.id.nav_gallery -> {
-
+            R.id.navigation_item_favourite -> {
+                //TODO: write code for fav fragment
             }
-            R.id.nav_slideshow -> {
-
+            R.id.navigation_item_linked_list -> {
+                launchFragment(0)
             }
-            R.id.nav_manage -> {
-
+            R.id.navigation_item_stack -> {
+                launchFragment(1)
             }
-            R.id.nav_share -> {
-
+            R.id.navigation_item_queues -> {
+                launchFragment(2)
             }
-            R.id.nav_send -> {
-
+            R.id.navigation_item_trees -> {
+                launchFragment(3)
+            }
+            R.id.navigation_item_graphs -> {
+                launchFragment(4)
+            }
+            R.id.navigation_item_searching -> {
+                launchFragment(5)
+            }
+            R.id.navigation_item_sorting -> {
+                launchFragment(6)
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun handleHomePageFragment() {
+        var count: Int = supportFragmentManager.backStackEntryCount
+        while (count > 1) {
+            popFragment()
+            count--
+        }
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
@@ -119,13 +143,13 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             supportFragmentManager.popBackStack()
             updateActionBarTitle(item)
             val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-            appBarLayout.setExpanded(false)
+            appBarLayout.setExpanded(isAppBarExpanded(appBarLayout))
             return true
         }
         return false
     }
 
-    private fun setTootbarTitle(title: String) {
+    private fun setToolbarTitle(title: String) {
         val collapseToolbar =  findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
         collapseToolbar.title = title
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
@@ -133,9 +157,22 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun updateActionBarTitle(item: ActionbarItem) {
-        setTootbarTitle(item.title)
+        setToolbarTitle(item.title)
         if (item.categoryIcon != 0) {
             findViewById<AppCompatImageView>(R.id.iv_category_logo).setImageResource(item.categoryIcon)
         }
+    }
+
+    private fun launchFragment(section: Int) {
+        lookupTable.getCategory(section)?.let {category ->
+            val fragment = instanceOf<ProgramsFragment>(Pair(Constants.BUNDLE_KEY, category.titleId),
+                    Pair(Constants.BUNDLE_OBJECT, category))
+            pushFragment(fragment)
+        }
+    }
+
+    private fun isAppBarExpanded(abl: AppBarLayout): Boolean {
+        val behavior = (abl.layoutParams as CoordinatorLayout.LayoutParams).behavior
+        return if (behavior is AppBarLayout.Behavior) behavior.topAndBottomOffset == 0 else false
     }
 }

@@ -72,7 +72,6 @@ class ProgramsFragment : BaseFragment(), Injectable {
             val fragment = instanceOf<DisplayProgramFragment>(Pair(Constants.BUNDLE_OBJECT, category!!),
                     Pair(Constants.BUNDLE_OBJECT_PROGRAM, program))
             pushFragment(fragment)
-            //Timber.i("Launch program fragment with = $program")
         }
         dataBinding.recyclerViewPrograms.adapter = adapter
     }

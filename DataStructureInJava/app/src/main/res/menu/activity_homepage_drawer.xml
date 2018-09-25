@@ -1,37 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/navigation_item_home"
+            android:checked="true"
+            android:icon="@drawable/ic_nv_home_black_24dp"
+            android:title="@string/home" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/navigation_item_favourite"
+            android:icon="@drawable/ic_favorite_color"
+            android:title="@string/favourite" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/navigation_item_faqs"
+            android:icon="@drawable/ic_dashboard_faq_24dp"
+            android:title="@string/faq" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/nv_all_categories">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/navigation_item_linked_list"
+                    android:icon="@drawable/ic_dashboard_linked_list_24dp"
+                    android:title="@string/linkedlist" />
+
+                <item
+                    android:id="@+id/navigation_item_stack"
+                    android:icon="@drawable/ic_dashboard_stack_24dp"
+                    android:title="@string/stack" />
+
+                <item
+                    android:id="@+id/navigation_item_queues"
+                    android:icon="@drawable/ic_dashboard_queue_24dp"
+                    android:title="@string/queue" />
+
+                <item
+                    android:id="@+id/navigation_item_trees"
+                    android:icon="@drawable/ic_dashboard_tree_24dp"
+                    android:title="@string/tree" />
+
+                <item
+                    android:id="@+id/navigation_item_graphs"
+                    android:icon="@drawable/ic_dashboard_graph_24dp"
+                    android:title="@string/graphs" />
+
+                <item
+                    android:id="@+id/navigation_item_searching"
+                    android:icon="@drawable/ic_nv_search_black_24dp"
+                    android:title="@string/searching" />
+
+                <item
+                    android:id="@+id/navigation_item_sorting"
+                    android:icon="@drawable/ic_dashboard_sort_24dp"
+                    android:title="@string/sorting" />
+
+
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/nv_app_title">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/navigation_item_settings"
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:title="@string/settings"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/navigation_item_support"
+                    android:icon="@drawable/ic_nv_feedback_black_24dp"
+                    android:title="@string/support_and_feedback" />
+
+                <item
+                    android:id="@+id/navigation_item_rate_us"
+                    android:icon="@drawable/ic_nv_play_store"
+                    android:title="@string/rate_us" />
+
+            </group>
         </menu>
     </item>
 
