@@ -1,14 +1,12 @@
 package com.saurabh.java.datastructure.ui.activities
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.viewpager.widget.ViewPager
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.databinding.ActivityQuestionCardBinding
 import com.saurabh.java.datastructure.db.tables.FAQ

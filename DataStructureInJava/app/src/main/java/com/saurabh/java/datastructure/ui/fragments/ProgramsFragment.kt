@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentProgramsBinding
+import com.saurabh.java.datastructure.db.tables.Program
 import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.ui.adapters.ProgramListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
@@ -68,12 +70,22 @@ class ProgramsFragment : BaseFragment(), Injectable {
 
     private fun setupList() {
         dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        adapter = ProgramListAdapter(dataBindingComponent, appExecutors) {program ->
+        adapter = ProgramListAdapter(dataBindingComponent, appExecutors, {program ->
             val fragment = instanceOf<DisplayProgramFragment>(Pair(Constants.BUNDLE_OBJECT, category!!),
                     Pair(Constants.BUNDLE_OBJECT_PROGRAM, program))
-            pushFragment(fragment)
-        }
+            pushFragment(fragment) },
+            {view, program ->
+                run {
+                    handleFavorite(view, program)
+                }
+            } )
         dataBinding.recyclerViewPrograms.adapter = adapter
+    }
+
+    private fun handleFavorite(view: View, program: Program) {
+        val button: ToggleButton = view as ToggleButton
+        program.favourite = if (button.isChecked) 1 else 0
+        viewmodel.updateProgram(program)
     }
 
     private fun setupViewModel() {

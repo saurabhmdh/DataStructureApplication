@@ -37,7 +37,9 @@
     <string name="google_play">GOOGLE PLAY</string>
 
     <string name="question_card_title">Question Card</string>
-    <!--<string name="txt_question_card_number">%1$d/%2$d</string>-->
+
     <string name="stub_question">Question Text</string>
     <string name="stub_answer">Answer Text</string>
+
+    <string name="share_using">Share using</string>
 </resources>

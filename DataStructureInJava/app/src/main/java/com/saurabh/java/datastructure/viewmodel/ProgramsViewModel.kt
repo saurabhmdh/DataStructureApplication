@@ -10,4 +10,8 @@ class ProgramsViewModel @Inject constructor(private val repo: ProgramRepository)
     fun getAllProgramsByCategory(category: String): LiveData<List<Program>> {
         return repo.getAllProgramsByCategory(category)
     }
+
+    fun updateProgram(program: Program) {
+        repo.updateProgram(program)
+    }
 }

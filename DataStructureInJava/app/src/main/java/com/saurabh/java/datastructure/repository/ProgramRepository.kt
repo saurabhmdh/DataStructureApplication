@@ -9,11 +9,14 @@ import javax.inject.Singleton
 
 @Singleton
 class ProgramRepository @Inject constructor(private val appExecutors: AppExecutors, private val progDao: ProgramDao) {
-    fun getAllPrograms(): LiveData<List<Program>> {
-        return progDao.getAllPrograms()
-    }
 
     fun getAllProgramsByCategory(category: String): LiveData<List<Program>> {
         return progDao.getAllProgramsByCategory(category)
+    }
+
+    fun updateProgram(program: Program) {
+        appExecutors.networkIO().execute {
+            progDao.update(program)
+        }
     }
 }
