@@ -46,13 +46,17 @@ class QuestionCardActivity: AppCompatActivity(), HasSupportFragmentInjector {
     private fun initQuestionCardViewPager(item: List<FAQ>) {
         val adapter = QuestionCardViewPagerAdapter(item, supportFragmentManager)
         binding.viewPager.adapter = adapter
-        binding.viewPager.currentItem = 1
         binding.viewPager.offscreenPageLimit = 3
         binding.viewPager.setPageTransformer(false) { page, position ->
             val normalizedPosition = Math.abs(Math.abs(position) - 1)
             page.scaleX = normalizedPosition / 2 + 0.5f
             page.scaleY = normalizedPosition / 2 + 0.5f
         }
+    }
+
+    fun updateQuestionNumber() {
+        val result : Int = (binding.viewPager.currentItem + 1)
+        binding.tvQuestionCardNumber.text = result.toString()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

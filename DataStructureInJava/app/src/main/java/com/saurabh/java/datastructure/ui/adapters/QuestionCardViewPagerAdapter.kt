@@ -10,7 +10,9 @@ import com.saurabh.java.datastructure.util.instanceOf
 
 class QuestionCardViewPagerAdapter(val items: List<FAQ>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
-        return instanceOf<QuestionCardFragment>(Pair(Constants.BUNDLE_POSITION, position))
+        return instanceOf<QuestionCardFragment>(
+                Pair(Constants.BUNDLE_POSITION, position),
+                Pair(Constants.BUNDLE_OBJECT, items[position]))
     }
 
     override fun getCount(): Int {
