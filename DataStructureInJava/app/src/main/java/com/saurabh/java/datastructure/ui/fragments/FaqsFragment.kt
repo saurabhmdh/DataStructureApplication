@@ -63,7 +63,7 @@ class FaqsFragment : BaseFragment(), Injectable {
 
 
     override fun getTitle(): ActionbarItem {
-        return ActionbarItem("Interview questions", R.drawable.ic_dashboard_faq_24dp)
+        return ActionbarItem(getString(R.string.faq), R.drawable.ic_dashboard_faq_24dp)
     }
 
     private fun setupListView() {

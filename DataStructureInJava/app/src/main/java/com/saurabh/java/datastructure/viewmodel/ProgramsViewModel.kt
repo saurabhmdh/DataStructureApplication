@@ -14,4 +14,8 @@ class ProgramsViewModel @Inject constructor(private val repo: ProgramRepository)
     fun updateProgram(program: Program) {
         repo.updateProgram(program)
     }
+
+    fun getAllFavorite(): LiveData<List<Program>> {
+        return repo.getAllFavorites()
+    }
 }

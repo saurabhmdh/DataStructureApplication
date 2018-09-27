@@ -19,4 +19,8 @@ class ProgramRepository @Inject constructor(private val appExecutors: AppExecuto
             progDao.update(program)
         }
     }
+
+    fun getAllFavorites(): LiveData<List<Program>> {
+        return progDao.getAllFavorites()
+    }
 }

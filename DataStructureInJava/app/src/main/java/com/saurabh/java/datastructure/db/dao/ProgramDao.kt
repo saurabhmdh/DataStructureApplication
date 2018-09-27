@@ -18,6 +18,9 @@ interface ProgramDao {
     @Query("SELECT * FROM ds_tbl_programs where `category_name` = :category")
     fun getAllProgramsByCategory(category: String): LiveData<List<Program>>
 
+    @Query("SELECT * FROM ds_tbl_programs where `is_favourite` == 1")
+    fun getAllFavorites(): LiveData<List<Program>>
+
     @Update
     fun update(program: Program)
 }

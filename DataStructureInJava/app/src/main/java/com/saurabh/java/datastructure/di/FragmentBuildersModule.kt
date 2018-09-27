@@ -24,4 +24,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeQuestionCardFragment(): QuestionCardFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeFavouriteFragment(): FavouriteFragment
 }
