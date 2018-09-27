@@ -28,7 +28,7 @@
                 android:layout_centerInParent="true"
                 app:imgRes="@{Category.resDrawable}"
                 android:layout_marginBottom="@dimen/grid_icon_margin_bottom"
-                app:srcCompat="@drawable/ic_launcher" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
             <RelativeLayout
                 android:id="@+id/ll_row_title_container"
