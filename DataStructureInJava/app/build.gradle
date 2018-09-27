@@ -68,6 +68,7 @@ dependencies {
     implementation deps.timber
 
     implementation deps.ktx.core
+    implementation deps.highlightjs
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler

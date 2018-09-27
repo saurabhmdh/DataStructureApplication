@@ -4,6 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
+import com.pddstudio.highlightjs.HighlightJsView
+import com.pddstudio.highlightjs.models.Language
+import com.pddstudio.highlightjs.models.Theme
 import javax.inject.Inject
 
 /**
@@ -24,5 +27,12 @@ class FragmentBindingAdapters @Inject constructor(val fragment: Fragment) {
     @BindingAdapter("imgRes")
     fun ImageView.setImage(drawable : Int) {
         this.setImageResource(drawable)
+    }
+
+    @BindingAdapter("setSourceCode")
+    fun HighlightJsView.setSourceCode(sourceCode: String) {
+        this.theme = Theme.ANDROID_STUDIO
+        this.highlightLanguage = Language.JAVA
+        this.setSource(sourceCode)
     }
 }

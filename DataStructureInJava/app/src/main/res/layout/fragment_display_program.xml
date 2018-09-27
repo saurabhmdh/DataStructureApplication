@@ -85,12 +85,12 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/five_dp">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.pddstudio.highlightjs.HighlightJsView
                             android:id="@+id/tv_program_code"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="@dimen/two_dp"
-                            android:text="@{program.programCode}"
+                            app:setSourceCode="@{program.programCode}"
                             android:textColor="@color/white" />
                     </RelativeLayout>
                 </androidx.core.widget.NestedScrollView>
