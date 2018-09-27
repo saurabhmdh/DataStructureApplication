@@ -137,6 +137,8 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             popFragment()
             count--
         }
+        val item: ActionbarItem = (supportFragmentManager.fragments[0] as BaseFragment).getTitle()
+        updateActionBarTitle(item)
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

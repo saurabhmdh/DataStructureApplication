@@ -2,6 +2,7 @@ package com.saurabh.java.datastructure.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,6 +31,20 @@ class QuestionCardActivity: AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_question_card)
         setupViewModel()
+        setupUIComponents()
+    }
+
+    private fun setupUIComponents() {
+       val imageView = findViewById<AppCompatImageView>(R.id.iv_back)
+        imageView.setOnClickListener {
+            finish()
+        }
+
+        //TODO: Share functionality to be added
+//        val shareView = findViewById<AppCompatImageView>(R.id.iv_share)
+//        shareView.setOnClickListener {
+//
+//        }
     }
 
     private fun setupViewModel() {

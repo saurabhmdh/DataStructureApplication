@@ -33,13 +33,13 @@
                 android:textColor="@color/question_card_strong_cyan" />
 
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <!--<androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_share"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/ic_share" />
+                app:srcCompat="@drawable/ic_share" />-->
 
         </RelativeLayout>
 
