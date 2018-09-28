@@ -52,7 +52,7 @@
     <color name="secondary_text_dark">@android:color/secondary_text_dark</color>
 
     <!-- Question Card Colors -->
-    <color name="question_card_strong_cyan">#00b4d7</color>
+    <color name="question_card_strong_cyan">#3BE6E3</color>
     <color name="question_card_strong_blue">#0093c5</color>
     <color name="question_card_dark_desaturated_violet">#FF4b2862</color>
     <color name="question_card_dark_moderate_pink">#FF7b3d67</color>

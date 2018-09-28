@@ -9,26 +9,27 @@
         android:background="@drawable/bg_question_card_activity"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/ll_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:gravity="center_vertical">
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 app:srcCompat="@drawable/ic_back" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
                 android:text="@string/question_card_title"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/question_card_strong_cyan" />
 
@@ -41,7 +42,7 @@
                 android:layout_alignParentEnd="true"
                 app:srcCompat="@drawable/ic_share" />-->
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -60,32 +61,15 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ViewSwitcher
-                android:id="@+id/vs_bottom_text_indicator"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:gravity="center">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_question_card_number"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_question_card_number"
-                    android:text="1"
-                    android:textColor="@color/primary_text_white_70_op" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_question_card_native_ad_text"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_question_card_number"
-                    android:text="2"
-                    android:textColor="@color/primary_text_white_70_op" />
-            </ViewSwitcher>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_question_card_number"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txt_home_grid_item"
+                android:background="@drawable/bg_question_card_number"
+                android:textColor="@color/black" />
         </LinearLayout>
     </RelativeLayout>
 </layout>
