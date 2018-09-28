@@ -42,9 +42,10 @@ class LookupTable @Inject constructor(var application: Application) {
 
     fun getAllCategory(): ArrayList<Category> {
         val data = ArrayList<Category>()
-        cacheData.forEach { _, v ->
-            data.add(v)
+        for((_, value) in cacheData) {
+            data.add(value)
         }
+
         return data
     }
 

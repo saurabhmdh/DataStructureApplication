@@ -7,15 +7,15 @@ apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-
     compileSdkVersion build_versions.compile_sdk
     buildToolsVersion build_versions.build_tools
+
     defaultConfig {
         applicationId "com.saurabh.java.datastructure"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 10000
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

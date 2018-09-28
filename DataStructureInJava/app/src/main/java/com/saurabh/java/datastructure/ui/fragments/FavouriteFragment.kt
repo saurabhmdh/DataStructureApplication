@@ -57,7 +57,8 @@ class FavouriteFragment : BaseFragment(), Injectable {
     private fun setupList() {
         dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         adapter = ProgramListAdapter(dataBindingComponent, appExecutors, {program ->
-            Timber.i("Saurabh clicked on program $program")
+            val fragment = instanceOf<DisplayProgramFragment>(Pair(Constants.BUNDLE_OBJECT_PROGRAM, program))
+            pushFragment(fragment)
         }, { view, program ->
                 run {
                     handleFavorite(view, program)

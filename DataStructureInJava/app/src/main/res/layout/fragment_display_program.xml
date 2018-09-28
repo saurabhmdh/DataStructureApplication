@@ -88,7 +88,7 @@
                         <com.pddstudio.highlightjs.HighlightJsView
                             android:id="@+id/tv_program_code"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:padding="@dimen/two_dp"
                             app:setSourceCode="@{program.programCode}"
                             android:textColor="@color/white" />

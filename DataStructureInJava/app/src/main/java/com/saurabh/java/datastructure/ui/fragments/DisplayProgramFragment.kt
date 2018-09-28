@@ -26,8 +26,10 @@ class DisplayProgramFragment: BaseFragment(), Injectable {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         val bundle = this.arguments
-        this.category = bundle?.getParcelable(Constants.BUNDLE_OBJECT) as Category
-        this.program = bundle.getParcelable(Constants.BUNDLE_OBJECT_PROGRAM) as Program
+        if (bundle?.containsKey(Constants.BUNDLE_OBJECT) == true) {
+            this.category = bundle.getParcelable(Constants.BUNDLE_OBJECT) as Category
+        }
+        this.program = bundle?.getParcelable(Constants.BUNDLE_OBJECT_PROGRAM) as Program
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,7 +42,7 @@ class DisplayProgramFragment: BaseFragment(), Injectable {
         category?.let {
             return ActionbarItem(it.titleName, it.resDrawable)
         }
-        return ActionbarItem()
+        return ActionbarItem(getString(R.string.favourite), R.drawable.ic_favorite_color)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
