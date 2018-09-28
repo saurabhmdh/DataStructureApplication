@@ -14,8 +14,16 @@ class PrefManager(var context: Application) {
         return mPref.getString(key, null)
     }
 
+    fun getInt(key: String): Int {
+        return mPref.getInt(key, 0)
+    }
+
     fun setValue(aKey: String, aValue: String) {
         mPref.edit().putString(aKey, aValue).apply()
+    }
+
+    fun setInt(key: String, value: Int) {
+        mPref.edit().putInt(key, value).apply()
     }
 
     fun clear(): Boolean {

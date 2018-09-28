@@ -3,6 +3,7 @@ package com.saurabh.java.datastructure.util.services
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
+import com.saurabh.java.datastructure.BuildConfig
 import com.saurabh.java.datastructure.DataStructureApplication
 import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.db.dao.ProgramDao
@@ -33,12 +34,12 @@ class BackGroundWorker : Worker() {
     override fun doWork(): Result {
         DaggerAppComponent.builder().application(applicationContext as DataStructureApplication).build().inject(this)
 
-        if (prefManager.getValue(Constants.KEY_FIRST_LAUNCH).isNullOrBlank()) {
+        if (prefManager.getInt(Constants.KEY_VERSION_CODE) != BuildConfig.VERSION_CODE) {
             //First launch so need to populate database.
             ProgramDataManager(dao, lookupTable, applicationContext)
             val name = "ds_droid.db"
             DatabaseCopier.copyAttachedDatabase(applicationContext, name)
-            prefManager.setValue(Constants.KEY_FIRST_LAUNCH, "1")
+            prefManager.setInt(Constants.KEY_VERSION_CODE, BuildConfig.VERSION_CODE)
         }
 
         return Result.SUCCESS

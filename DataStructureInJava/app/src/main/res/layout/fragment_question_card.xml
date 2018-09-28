@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.70">
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_question_answer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -98,7 +98,7 @@
                     android:layout_margin="@dimen/activity_horizontal_margin_half"
                     android:gravity="center|start"
                     android:scrollbars="vertical"
-                    android:text="@string/stub_answer"
+                    android:fontFamily="@font/source_code_regular"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/primary_text_white_70_op" />
             </RelativeLayout>

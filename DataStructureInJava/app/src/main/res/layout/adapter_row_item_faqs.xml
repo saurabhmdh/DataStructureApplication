@@ -88,6 +88,7 @@
                     android:gravity="start|center"
                     android:padding="@dimen/ten_dp"
                     android:text="@{FaqsBean.answer}"
+                    android:fontFamily="@font/source_code_regular"
                     android:textColor="@color/primary_text_white_70_op"
                     android:textSize="@dimen/faq_answer_txt_size" />
             </LinearLayout>

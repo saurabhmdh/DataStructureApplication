@@ -2,6 +2,7 @@ package com.saurabh.java.datastructure.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,8 @@ class QuestionCardFragment: BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        dataBinding.tvQuestionAnswer.movementMethod = ScrollingMovementMethod()
+        
         faq?.let {
             dataBinding.tvFragmentTitle.text = it.question
             dataBinding.tvQuestionAnswer.text = it.answer

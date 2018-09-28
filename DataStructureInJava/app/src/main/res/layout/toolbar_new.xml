@@ -36,7 +36,8 @@
             <RelativeLayout
                 android:layout_width="@dimen/category_icon_container_width"
                 android:layout_height="@dimen/category_icon_container_height"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:background="@mipmap/bg_app_bar_dog_ear">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_category_logo"
