@@ -17,6 +17,7 @@ class ProgramDataManager (val dao: ProgramDao, private val lookupTable: LookupTa
     }
 
     private fun start() {
+        dao.clearData()
         val directories = lookupTable.getAllCategoriesName()
         val list = ArrayList<Program>()
         for (name in directories) {

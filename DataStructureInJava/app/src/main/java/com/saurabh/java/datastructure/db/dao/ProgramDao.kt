@@ -21,6 +21,9 @@ interface ProgramDao {
     @Query("SELECT * FROM ds_tbl_programs where `is_favourite` == 1")
     fun getAllFavorites(): LiveData<List<Program>>
 
+    @Query("DELETE FROM ds_tbl_programs")
+    fun clearData()
+
     @Update
     fun update(program: Program)
 }
