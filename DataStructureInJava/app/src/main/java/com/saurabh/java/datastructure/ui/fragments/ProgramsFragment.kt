@@ -6,21 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ToggleButton
-import androidx.databinding.DataBindingUtil
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
-import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentProgramsBinding
 import com.saurabh.java.datastructure.db.tables.Program
 import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.ui.adapters.ProgramListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
-import com.saurabh.java.datastructure.util.instanceOf
 
 import com.saurabh.java.datastructure.viewmodel.ProgramsViewModel
 import com.saurabh.java.datastructure.vo.ActionbarItem
@@ -44,14 +43,15 @@ class ProgramsFragment : BaseFragment(), Injectable {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        val bundle = this.arguments
-        this.category = bundle?.getParcelable(Constants.BUNDLE_OBJECT) as Category
+        arguments?.let {bundle ->
+            val args = ProgramsFragmentArgs.fromBundle(bundle)
+            this.category = args.bundleObject
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentProgramsBinding>(inflater, R.layout.fragment_programs, container, false, dataBindingComponent)
-        dataBinding = binding
-        return binding.root
+        dataBinding = FragmentProgramsBinding.inflate(inflater, container, false, dataBindingComponent)
+        return dataBinding.root
     }
 
     override fun getTitle(): ActionbarItem {
@@ -68,12 +68,11 @@ class ProgramsFragment : BaseFragment(), Injectable {
     }
 
     private fun setupList() {
-        dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity)
         adapter = ProgramListAdapter(dataBindingComponent, appExecutors, {program ->
-            val fragment = instanceOf<DisplayProgramFragment>(Pair(Constants.BUNDLE_OBJECT, category!!),
-                    Pair(Constants.BUNDLE_OBJECT_PROGRAM, program))
-            pushFragment(fragment) },
-            {view, program ->
+            Navigation.findNavController(activity!!, R.id.nav_host_fragment)
+                    .navigate(ProgramsFragmentDirections.actionNavigateDisplayProgram(category!!, program)) },
+            { view, program ->
                 run {
                     handleFavorite(view, program)
                 }

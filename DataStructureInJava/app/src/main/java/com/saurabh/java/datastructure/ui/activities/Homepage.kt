@@ -4,35 +4,37 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+
 import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.saurabh.java.datastructure.R
-import com.saurabh.java.datastructure.constants.Constants
-import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
-import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
 import com.saurabh.java.datastructure.util.LookupTable
-import com.saurabh.java.datastructure.util.instanceOf
-import com.saurabh.java.datastructure.vo.ActionbarItem
+
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.activity_homepage.*
+
 import javax.inject.Inject
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.saurabh.java.datastructure.ui.fragments.*
-import timber.log.Timber
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.google.android.material.navigation.NavigationView
+
+import com.saurabh.java.datastructure.databinding.ActivityHomepageBinding
+import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
+import com.saurabh.java.datastructure.ui.fragments.GenericDialogFragment
+import com.saurabh.java.datastructure.ui.fragments.HomePageFragmentDirections
+import com.saurabh.java.datastructure.vo.ActionbarItem
 
 
-class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector,
-        IFragmentLifeCycleEvent, IActionBarTitleHandler {
+class Homepage : AppCompatActivity(),
+        HasSupportFragmentInjector,
+        IActionBarTitleHandler {
 
 
     @Inject
@@ -41,135 +43,50 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     @Inject
     lateinit var lookupTable: LookupTable
 
+    lateinit var mBinding: ActivityHomepageBinding
+    lateinit var drawer: DrawerLayout
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_homepage)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_homepage)
         setupToolbar()
-        pushFragment(instanceOf<HomePageFragment>())
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mBinding.toolbar)
+        drawer = mBinding.drawerLayout
 
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-        val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-        appBarLayout.setExpanded(true)
-        nav_view.setNavigationItemSelectedListener(this)
-    }
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        val topLevelDestinations = setOf(R.id.id_home)
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            if (!popFragment()) {
-                finish()
-            }
-        }
-    }
+        appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations).setDrawerLayout(drawer).build()
+        setupActionBarWithNavController(this, navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(mBinding.navView, navController)
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.navigation_item_home -> {
-                handleHomePageFragment()
-            }
-            R.id.navigation_item_faqs -> {
-                pushFragment(instanceOf<FaqsFragment>())
-            }
-            R.id.navigation_item_favourite -> {
-                pushFragment(instanceOf<FavouriteFragment>())
-            }
-            R.id.navigation_item_linked_list -> {
-                launchFragment(0)
-            }
-            R.id.navigation_item_stack -> {
-                launchFragment(1)
-            }
-            R.id.navigation_item_queues -> {
-                launchFragment(2)
-            }
-            R.id.navigation_item_trees -> {
-                launchFragment(3)
-            }
-            R.id.navigation_item_graphs -> {
-                launchFragment(4)
-            }
-            R.id.navigation_item_searching -> {
-                launchFragment(5)
-            }
-            R.id.navigation_item_sorting -> {
-                launchFragment(6)
-            }
-            R.id.navigation_item_support -> {
-                showFeedbackDialog()
-            }
-            R.id.navigation_item_rate_us -> {
-                showRateThisAppDialog()
-            }
-        }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    private fun handleHomePageFragment() {
-        var count: Int = supportFragmentManager.backStackEntryCount
-        while (count > 1) {
-            popFragment()
-            count--
-        }
-        val item: ActionbarItem = (supportFragmentManager.fragments[0] as BaseFragment).getTitle()
-        updateActionBarTitle(item)
+        mBinding.navView.setNavigationItemSelectedListener(NavigationListener())
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    override fun pushFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.main_container, fragment, fragment.toString()).addToBackStack(fragment.toString()).commitAllowingStateLoss()
-    }
-
-    override fun popFragment(): Boolean {
-        if (supportFragmentManager.backStackEntryCount > 1) { //Don't remove homepage fragment
-            val fragment = supportFragmentManager.fragments[supportFragmentManager.backStackEntryCount - 2]
-            fragment as BaseFragment
-            val item: ActionbarItem = fragment.getTitle()
-            supportFragmentManager.popBackStack()
-            updateActionBarTitle(item)
-            val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-            appBarLayout.setExpanded(isAppBarExpanded(appBarLayout))
-            return true
-        }
-        return false
-    }
 
     private fun setToolbarTitle(title: String) {
-        val collapseToolbar =  findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-        collapseToolbar.title = title
-        val appBarLayout = findViewById<AppBarLayout>(R.id.appbar)
-        appBarLayout.setExpanded(true)
+        mBinding.collapsingToolbar.title = title
+        mBinding.appbar.setExpanded(true)
     }
 
     override fun updateActionBarTitle(item: ActionbarItem) {
         setToolbarTitle(item.title)
         if (item.categoryIcon != 0) {
-            findViewById<AppCompatImageView>(R.id.iv_category_logo).setImageResource(item.categoryIcon)
+            mBinding.ivCategoryLogo.setImageResource(item.categoryIcon)
         }
     }
 
     private fun launchFragment(section: Int) {
         lookupTable.getCategory(section)?.let {category ->
-            val fragment = instanceOf<ProgramsFragment>(Pair(Constants.BUNDLE_KEY, category.titleId),
-                    Pair(Constants.BUNDLE_OBJECT, category))
-            pushFragment(fragment)
+            navController.navigate(HomePageFragmentDirections.actionNavigateProgram(category, category.titleId))
         }
-    }
-
-    private fun isAppBarExpanded(abl: AppBarLayout): Boolean {
-        val behavior = (abl.layoutParams as CoordinatorLayout.LayoutParams).behavior
-        return if (behavior is AppBarLayout.Behavior) behavior.topAndBottomOffset == 0 else false
     }
 
     private fun showFeedbackDialog() {
@@ -212,4 +129,36 @@ class Homepage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         dialog.show(supportFragmentManager, "showRateThisAppDialog")
     }
 
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    internal inner class NavigationListener : NavigationView.OnNavigationItemSelectedListener {
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+            when (item.itemId) {
+                R.id.navigation_item_home -> navController.navigate(R.id.id_home)
+                R.id.navigation_item_faqs -> navController.navigate(HomePageFragmentDirections.actionNavigateFaq())
+                R.id.navigation_item_favourite -> navController.navigate(HomePageFragmentDirections.actionNavigateFavorite())
+                R.id.navigation_item_linked_list -> launchFragment(0)
+                R.id.navigation_item_stack -> launchFragment(1)
+                R.id.navigation_item_queues -> launchFragment(2)
+                R.id.navigation_item_trees -> launchFragment(3)
+                R.id.navigation_item_graphs -> launchFragment(4)
+                R.id.navigation_item_searching -> launchFragment(5)
+                R.id.navigation_item_sorting -> launchFragment(6)
+                R.id.navigation_item_support -> showFeedbackDialog()
+                R.id.navigation_item_rate_us -> showRateThisAppDialog()
+            }
+            drawer.closeDrawer(GravityCompat.START)
+            return false
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+    }
 }

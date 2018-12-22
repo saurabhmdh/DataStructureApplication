@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/id_home">
+    <fragment
+        android:id="@+id/id_home"
+        android:name="com.saurabh.java.datastructure.ui.fragments.HomePageFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigate_faq"
+            app:destination="@id/navigation_fragment_faq"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigate_favorite"
+            app:destination="@id/navigation_fragment_favorite"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigate_program"
+            app:destination="@id/navigation_fragment_program"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fragment_faq"
+        android:name="com.saurabh.java.datastructure.ui.fragments.FaqsFragment"
+        android:label="@string/faq"
+        tools:layout="@layout/fragment_faqs">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fragment_favorite"
+        android:name="com.saurabh.java.datastructure.ui.fragments.FavouriteFragment"
+        android:label="@string/favourite"
+        tools:layout="@layout/fragment_programs">
+        <action
+            android:id="@+id/action_navigate_display_program"
+            app:destination="@id/navigation_fragment_display_program"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fragment_program"
+        android:name="com.saurabh.java.datastructure.ui.fragments.ProgramsFragment"
+        android:label="@string/faq"
+        tools:layout="@layout/fragment_programs">
+        <argument android:name="bundle_object" app:argType="com.saurabh.java.datastructure.vo.Category" />
+        <argument android:name="bundle_id" app:argType="integer" />
+        <action
+            android:id="@+id/action_navigate_display_program"
+            app:destination="@id/navigation_fragment_display_program"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fragment_display_program"
+        android:name="com.saurabh.java.datastructure.ui.fragments.DisplayProgramFragment"
+        android:label="@string/faq"
+        tools:layout="@layout/fragment_display_program">
+        <argument android:name="bundle_object" app:argType="com.saurabh.java.datastructure.vo.Category" app:nullable="true"/>
+        <argument android:name="bundle_program" app:argType="com.saurabh.java.datastructure.db.tables.Program" />
+    </fragment>
+
+</navigation>

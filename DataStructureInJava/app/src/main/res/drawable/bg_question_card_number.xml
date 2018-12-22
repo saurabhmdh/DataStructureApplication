@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="50dp" />
-    <solid android:color="#3BE6E3" />
+    <solid android:color="@color/question_card_strong_blue" />
     <padding
         android:bottom="0dp"
         android:left="0dp"

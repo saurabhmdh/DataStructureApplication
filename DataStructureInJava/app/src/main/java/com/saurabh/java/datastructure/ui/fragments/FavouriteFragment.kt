@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ToggleButton
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
-import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentProgramsBinding
 import com.saurabh.java.datastructure.db.tables.Program
 import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.ui.adapters.ProgramListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
-import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.viewmodel.ProgramsViewModel
 import com.saurabh.java.datastructure.vo.ActionbarItem
-import timber.log.Timber
 import javax.inject.Inject
 
 class FavouriteFragment : BaseFragment(), Injectable {
@@ -39,9 +36,8 @@ class FavouriteFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentProgramsBinding>(inflater, R.layout.fragment_programs, container, false, dataBindingComponent)
-        dataBinding = binding
-        return binding.root
+        dataBinding = FragmentProgramsBinding.inflate(inflater, container, false, dataBindingComponent)
+        return dataBinding.root
     }
 
     override fun getTitle(): ActionbarItem {
@@ -55,10 +51,9 @@ class FavouriteFragment : BaseFragment(), Injectable {
     }
 
     private fun setupList() {
-        dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        dataBinding.recyclerViewPrograms.layoutManager = LinearLayoutManager(activity)
         adapter = ProgramListAdapter(dataBindingComponent, appExecutors, {program ->
-            val fragment = instanceOf<DisplayProgramFragment>(Pair(Constants.BUNDLE_OBJECT_PROGRAM, program))
-            pushFragment(fragment)
+            Navigation.findNavController(activity!!, R.id.nav_host_fragment).navigate(FavouriteFragmentDirections.actionNavigateDisplayProgram(null, program))
         }, { view, program ->
                 run {
                     handleFavorite(view, program)

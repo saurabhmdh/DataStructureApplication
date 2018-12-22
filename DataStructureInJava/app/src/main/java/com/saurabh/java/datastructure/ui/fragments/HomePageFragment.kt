@@ -5,22 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.GridLayoutManager
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
-import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentHomeBinding
 import com.saurabh.java.datastructure.di.Injectable
 import com.saurabh.java.datastructure.ui.adapters.HomepageListAdapter
 import com.saurabh.java.datastructure.util.LookupTable
 import com.saurabh.java.datastructure.util.autoCleared
-import com.saurabh.java.datastructure.util.instanceOf
 import com.saurabh.java.datastructure.vo.ActionbarItem
 import com.saurabh.java.datastructure.vo.Category
-import timber.log.Timber
+
 import java.util.*
 import javax.inject.Inject
 
@@ -38,9 +36,8 @@ class HomePageFragment : BaseFragment(), Injectable {
     lateinit var lookupTable: LookupTable
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false, dataBindingComponent)
-        dataBinding = binding
-        return binding.root
+        dataBinding = FragmentHomeBinding.inflate(inflater, container, false, dataBindingComponent)
+        return dataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,15 +62,13 @@ class HomePageFragment : BaseFragment(), Injectable {
         if (category.titleId < 7) {
             gotoSection(category)
         } else {
-            val fragment = instanceOf<FaqsFragment>()
-            pushFragment(fragment)
+            Navigation.findNavController(activity!!, R.id.nav_host_fragment).navigate(HomePageFragmentDirections.actionNavigateFaq())
         }
     }
 
     private fun gotoSection(category: Category) {
-        val fragment = instanceOf<ProgramsFragment>(Pair(Constants.BUNDLE_KEY, category.titleId),
-                Pair(Constants.BUNDLE_OBJECT, category))
-        pushFragment(fragment)
+        Navigation.findNavController(activity!!, R.id.nav_host_fragment)
+                .navigate(HomePageFragmentDirections.actionNavigateProgram(category, category.titleId))
     }
 
 

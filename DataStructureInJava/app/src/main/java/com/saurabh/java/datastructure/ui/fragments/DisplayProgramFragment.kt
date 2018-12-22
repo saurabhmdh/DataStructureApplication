@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
-import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.FragmentDisplayProgramBinding
 import com.saurabh.java.datastructure.db.tables.Program
 import com.saurabh.java.datastructure.di.Injectable
@@ -25,17 +23,16 @@ class DisplayProgramFragment: BaseFragment(), Injectable {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        val bundle = this.arguments
-        if (bundle?.containsKey(Constants.BUNDLE_OBJECT) == true) {
-            this.category = bundle.getParcelable(Constants.BUNDLE_OBJECT) as Category
+        arguments?.let { bundle ->
+            val args = DisplayProgramFragmentArgs.fromBundle(bundle)
+            this.category = args.bundleObject
+            this.program = args.bundleProgram
         }
-        this.program = bundle?.getParcelable(Constants.BUNDLE_OBJECT_PROGRAM) as Program
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentDisplayProgramBinding>(inflater, R.layout.fragment_display_program, container, false, dataBindingComponent)
-        dataBinding = binding
-        return binding.root
+        dataBinding = FragmentDisplayProgramBinding.inflate(inflater, container, false, dataBindingComponent)
+        return dataBinding.root
     }
 
     override fun getTitle(): ActionbarItem {

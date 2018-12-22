@@ -57,7 +57,7 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.cardview
     implementation deps.support.design
-    implementation deps.navigation.fragment_ktx
+
     implementation deps.room.runtime
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
@@ -74,7 +74,12 @@ dependencies {
     implementation deps.work.runtime_ktx
     implementation deps.timber
     implementation deps.ktx.core
+    implementation deps.ktx.ktx_fragment
     implementation deps.highlightjs
+
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
+
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
     kapt deps.room.compiler
@@ -84,7 +89,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
-    androidTestImplementation deps.navigation.testing_ktx
+
     androidTestImplementation deps.support.app_compat
     androidTestImplementation deps.support.recyclerview
     androidTestImplementation deps.support.cardview

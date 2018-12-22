@@ -9,27 +9,23 @@ import com.saurabh.java.datastructure.vo.ActionbarItem
 
 abstract class BaseFragment : Fragment() {
 
-    private var iFragmentLifeCycleEvent: IFragmentLifeCycleEvent? = null
     private var iActionBarTitleHandler: IActionBarTitleHandler? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is IFragmentLifeCycleEvent) {
-            iFragmentLifeCycleEvent = context
-        }
         if (context is IActionBarTitleHandler) {
             iActionBarTitleHandler = context
         }
     }
 
     open fun pushFragment(fragment: Fragment) {
-        iFragmentLifeCycleEvent?.pushFragment(fragment)
+        //iFragmentLifeCycleEvent?.pushFragment(fragment)
     }
 
     abstract fun getTitle() : ActionbarItem
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         val item: ActionbarItem = getTitle()
         iActionBarTitleHandler?.updateActionBarTitle(item)
     }

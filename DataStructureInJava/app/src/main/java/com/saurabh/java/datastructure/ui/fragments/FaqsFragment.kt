@@ -1,11 +1,10 @@
 package com.saurabh.java.datastructure.ui.fragments
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -14,16 +13,12 @@ import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.FragmentFaqsBinding
-import com.saurabh.java.datastructure.db.tables.FAQ
 import com.saurabh.java.datastructure.di.Injectable
-import com.saurabh.java.datastructure.ui.adapters.FAQsListAdapter
 import com.saurabh.java.datastructure.ui.adapters.FaqsObjectAdapter
 import com.saurabh.java.datastructure.util.autoCleared
 import com.saurabh.java.datastructure.viewmodel.FAQViewModel
 import com.saurabh.java.datastructure.vo.ActionbarItem
 
-
-import java.util.ArrayList
 import javax.inject.Inject
 
 class FaqsFragment : BaseFragment(), Injectable {
@@ -40,9 +35,8 @@ class FaqsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentFaqsBinding>(inflater, R.layout.fragment_faqs, container, false, dataBindingComponent)
-        dataBinding = binding
-        return binding.root
+        dataBinding = FragmentFaqsBinding.inflate(inflater, container,false, dataBindingComponent)
+        return dataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -67,7 +61,7 @@ class FaqsFragment : BaseFragment(), Injectable {
     }
 
     private fun setupListView() {
-        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(activity)
         dataBinding.recyclerviewFaqs.layoutManager = layoutManager
         dataBinding.recyclerviewFaqs.setHasFixedSize(true)
 
