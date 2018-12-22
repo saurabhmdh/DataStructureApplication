@@ -13,8 +13,9 @@ import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.databinding.FragmentFaqsBinding
+import com.saurabh.java.datastructure.db.tables.FAQ
 import com.saurabh.java.datastructure.di.Injectable
-import com.saurabh.java.datastructure.ui.adapters.FaqsObjectAdapter
+import com.saurabh.java.datastructure.ui.adapters.FAQsListAdapter
 import com.saurabh.java.datastructure.util.autoCleared
 import com.saurabh.java.datastructure.viewmodel.FAQViewModel
 import com.saurabh.java.datastructure.vo.ActionbarItem
@@ -26,7 +27,7 @@ class FaqsFragment : BaseFragment(), Injectable {
 
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentFaqsBinding>()
-    private var adapter by autoCleared<FaqsObjectAdapter>()
+    private var adapter by autoCleared<FAQsListAdapter>()
     private lateinit var faqVM : FAQViewModel
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -50,7 +51,7 @@ class FaqsFragment : BaseFragment(), Injectable {
 
         faqVM.getAllFaqs().observe(this, Observer {data ->
             data?.let {
-                adapter.submitList(it)
+                adapter.submitList(it.toMutableList())
             }
         })
     }
@@ -65,16 +66,13 @@ class FaqsFragment : BaseFragment(), Injectable {
         dataBinding.recyclerviewFaqs.layoutManager = layoutManager
         dataBinding.recyclerviewFaqs.setHasFixedSize(true)
 
-        this@FaqsFragment.adapter = FaqsObjectAdapter(activity)
+        this@FaqsFragment.adapter = FAQsListAdapter(dataBindingComponent, appExecutors,
+                object : FAQsListAdapter.FAQsListClickCallback {
+                    override fun onClick(faq: FAQ, position: Int) {
+                        faq.isOpen = if (faq.isOpen == 0) 1 else 0
+                        faqVM.updateFAQ(faq)
+                    }
+        })
         dataBinding.recyclerviewFaqs.adapter = this@FaqsFragment.adapter
-
-//        this@FaqsFragment.adapter = FAQsListAdapter(dataBindingComponent, appExecutors,
-//                object : FAQsListAdapter.FAQsListClickCallback {
-//                    override fun onClick(faq: FAQ, position: Int) {
-//                        faq.isOpen = if (faq.isOpen == 0) 1 else 0
-//                        faqVM.updateFAQ(faq)
-//                    }
-//        })
-//        dataBinding.recyclerviewFaqs.adapter = this@FaqsFragment.adapter
     }
 }

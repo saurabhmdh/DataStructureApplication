@@ -1,6 +1,7 @@
 package com.saurabh.java.datastructure.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -43,9 +44,11 @@ class FAQsListAdapter(
         binding.ivMoreOrLess.setOnClickListener{ _ ->
             binding.faqsBean?.let {faq ->
                 if (faq.isOpen == 0) {
-                    binding.ivMoreOrLess.setImageResource(R.drawable.ic_down_arrow)
-                } else {
                     binding.ivMoreOrLess.setImageResource(R.drawable.ic_up_arrow)
+                    binding.llAnswer.visibility = View.VISIBLE
+                } else {
+                    binding.ivMoreOrLess.setImageResource(R.drawable.ic_down_arrow)
+                    binding.llAnswer.visibility = View.GONE
                 }
                 callback.onClick(faq, position)
             }

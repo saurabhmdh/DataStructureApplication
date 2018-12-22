@@ -1,10 +1,8 @@
 package com.saurabh.java.datastructure.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.saurabh.java.datastructure.interfaces.IActionBarTitleHandler
-import com.saurabh.java.datastructure.interfaces.IFragmentLifeCycleEvent
 import com.saurabh.java.datastructure.vo.ActionbarItem
 
 abstract class BaseFragment : Fragment() {
