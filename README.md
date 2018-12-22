@@ -1,6 +1,4 @@
 # DataStructureApplication
-=========================
-[![CircleCI](https://circleci.com/gh/googlesamples/android-sunflower/tree/master.svg?style=shield)](https://circleci.com/gh/googlesamples/android-sunflower/tree/master)
 
 This is a learning application illustrating Android development best practices with Android Jetpack.
 
