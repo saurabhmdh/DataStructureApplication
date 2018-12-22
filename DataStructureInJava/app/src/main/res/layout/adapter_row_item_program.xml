@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="java.lang.String" />
@@ -22,7 +23,8 @@
         card_view:cardBackgroundColor="@color/bg_card_view"
         card_view:cardCornerRadius="@dimen/cardview_default_radius"
         card_view:cardElevation="@dimen/cardview_default_elevation"
-        card_view:cardUseCompatPadding="true">
+        card_view:cardUseCompatPadding="true"
+        tools:ignore="PrivateResource">
 
         <RelativeLayout
             android:layout_width="match_parent"

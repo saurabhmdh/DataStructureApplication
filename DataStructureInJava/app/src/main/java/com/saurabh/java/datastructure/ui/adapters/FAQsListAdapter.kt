@@ -32,16 +32,15 @@ class FAQsListAdapter(
 
 
     override fun createBinding(parent: ViewGroup): AdapterRowItemFaqsBinding {
-        val binding = DataBindingUtil
-                .inflate<AdapterRowItemFaqsBinding>(LayoutInflater.from(parent.context),
+
+        return DataBindingUtil
+                .inflate(LayoutInflater.from(parent.context),
                         R.layout.adapter_row_item_faqs, parent, false,
                         dataBindingComponent)
-
-        return binding
     }
     override fun bind(binding: AdapterRowItemFaqsBinding, item: FAQ, position: Int) {
         binding.faqsBean = item
-        binding.ivMoreOrLess.setOnClickListener{ _ ->
+        binding.ivMoreOrLess.setOnClickListener{
             binding.faqsBean?.let {faq ->
                 if (faq.isOpen == 0) {
                     binding.ivMoreOrLess.setImageResource(R.drawable.ic_up_arrow)

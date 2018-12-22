@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
  *
  * @return Returns an instance of Fragment as the specified generic type with the params applied as arguments
  */
-inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>)
-        = T::class.java.newInstance().apply {
+inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>): T = T::class.java.newInstance().apply {
     arguments = bundleOf(*params)
 }

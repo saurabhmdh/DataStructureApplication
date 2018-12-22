@@ -12,7 +12,7 @@ import com.saurabh.java.datastructure.vo.Category
 
 class HomepageListAdapter(
         private val dataBindingComponent: FragmentDataBindingComponent,
-        private val appExecutors: AppExecutors,
+        appExecutors: AppExecutors,
         private val callback: CategoryClickCallback)
     : DataBoundListAdapter<Category, AdapterRowItemListviewHomeBinding>(
         appExecutors = appExecutors,
@@ -32,7 +32,7 @@ class HomepageListAdapter(
                 .inflate<AdapterRowItemListviewHomeBinding>(LayoutInflater.from(parent.context),
                         R.layout.adapter_row_item_listview_home, parent, false,
                         dataBindingComponent)
-        binding.llRowContainer.setOnClickListener { _ ->
+        binding.llRowContainer.setOnClickListener {
             binding.category?.let {category ->
                 callback.onClick(category)
             }

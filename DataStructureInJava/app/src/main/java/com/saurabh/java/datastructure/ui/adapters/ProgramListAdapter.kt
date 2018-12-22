@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.saurabh.java.datastructure.AppExecutors
 import com.saurabh.java.datastructure.R
@@ -36,7 +35,7 @@ class ProgramListAdapter (private val dataBindingComponent: FragmentDataBindingC
                 .inflate<AdapterRowItemProgramBinding>(LayoutInflater.from(parent.context),
                         R.layout.adapter_row_item_program, parent, false,
                         dataBindingComponent)
-        binding.llMainContent.setOnClickListener{ _ ->
+        binding.llMainContent.setOnClickListener{
             binding.program?.let {
                 callback?.invoke(it)
             }
@@ -48,7 +47,7 @@ class ProgramListAdapter (private val dataBindingComponent: FragmentDataBindingC
         }
         binding.ivCopy.setOnClickListener {
             val code = binding?.program?.programCode ?: Constants.EMPTY_STRING
-            Snackbar.make( binding.ivCopy, "Copied to clipboard", BaseTransientBottomBar.LENGTH_SHORT).show()
+            Snackbar.make( binding.ivCopy, "Copied to clipboard", Snackbar.LENGTH_SHORT).show()
             Utils.copyToClipboard(parent.context, code)
         }
         binding.ivShare.setOnClickListener {

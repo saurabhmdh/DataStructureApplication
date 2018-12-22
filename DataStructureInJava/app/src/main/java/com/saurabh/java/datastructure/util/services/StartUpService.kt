@@ -11,7 +11,6 @@ import com.saurabh.java.datastructure.db.sqlasset.DatabaseCopier
 import com.saurabh.java.datastructure.di.DaggerAppComponent
 import com.saurabh.java.datastructure.util.LookupTable
 import com.saurabh.java.datastructure.util.PrefManager
-import timber.log.Timber
 import javax.inject.Inject
 
 class StartUpService @Inject constructor() {

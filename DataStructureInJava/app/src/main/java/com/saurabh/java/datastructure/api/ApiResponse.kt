@@ -53,22 +53,6 @@ data class ApiSuccessResponse<T>(
             links = linkHeader?.extractLinks() ?: emptyMap()
     )
 
-    val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
-        links[NEXT_LINK]?.let { next ->
-            val matcher = PAGE_PATTERN.matcher(next)
-            if (!matcher.find() || matcher.groupCount() != 1) {
-                null
-            } else {
-                try {
-                    Integer.parseInt(matcher.group(1))
-                } catch (ex: NumberFormatException) {
-                    Timber.w("cannot parse next page from %s", next)
-                    null
-                }
-            }
-        }
-    }
-
     companion object {
         private val LINK_PATTERN = Pattern.compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
         private val PAGE_PATTERN = Pattern.compile("\\bpage=(\\d+)")

@@ -43,7 +43,7 @@ class Homepage : AppCompatActivity(),
     @Inject
     lateinit var lookupTable: LookupTable
 
-    lateinit var mBinding: ActivityHomepageBinding
+    private lateinit var mBinding: ActivityHomepageBinding
     lateinit var drawer: DrawerLayout
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
