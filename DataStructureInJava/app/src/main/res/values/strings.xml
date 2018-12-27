@@ -42,4 +42,6 @@
     <string name="stub_answer">Answer Text</string>
 
     <string name="share_using">Share using</string>
+
+    <string name="app_name_with_index">PdfRendererBasic (%1$d/%2$d)</string>
 </resources>

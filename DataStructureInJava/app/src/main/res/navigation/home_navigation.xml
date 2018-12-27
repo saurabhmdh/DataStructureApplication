@@ -78,4 +78,10 @@
         <argument android:name="bundle_program" app:argType="com.saurabh.java.datastructure.db.tables.Program" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_fragment_pdf"
+        android:name="com.saurabh.java.datastructure.ui.fragments.PdfRendererBasicFragment"
+        android:label="@string/faq"
+        tools:layout="@layout/fragment_pdf_renderer_basic">
+    </fragment>
 </navigation>

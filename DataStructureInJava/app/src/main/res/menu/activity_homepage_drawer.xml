@@ -80,6 +80,10 @@
                     android:icon="@drawable/ic_nv_play_store"
                     android:title="@string/rate_us" />
 
+                <item
+                    android:id="@+id/navigation_to_pdf_fragment"
+                    android:icon="@drawable/ic_nv_play_store"
+                    android:title="Open PDF" />
             </group>
         </menu>
     </item>

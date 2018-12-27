@@ -152,10 +152,15 @@ class Homepage : AppCompatActivity(),
                 R.id.navigation_item_sorting -> launchFragment(6)
                 R.id.navigation_item_support -> showFeedbackDialog()
                 R.id.navigation_item_rate_us -> showRateThisAppDialog()
+                R.id.navigation_to_pdf_fragment -> openPDFFragment()
             }
             drawer.closeDrawer(GravityCompat.START)
             return false
         }
+    }
+
+    private fun openPDFFragment() {
+        navController.navigate(R.id.navigation_fragment_pdf)
     }
 
     override fun onSupportNavigateUp(): Boolean {

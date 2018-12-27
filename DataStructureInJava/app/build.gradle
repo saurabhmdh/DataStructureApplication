@@ -14,8 +14,8 @@ android {
         applicationId "com.saurabh.java.datastructure"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 10002
-        versionName "1.0.0"
+        versionCode 10003
+        versionName "1.00.03"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -33,9 +33,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'saurabh'
-            keyPassword 'aeiou'
+            keyPassword '100rabh*'
             storeFile file('extra/keys')
-            storePassword '123456'
+            storePassword '100rabh*'
         }
     }
 
