@@ -19,14 +19,8 @@ class ProgramListAdapter (private val dataBindingComponent: FragmentDataBindingC
                           private val toggleFav: ((View, Program) -> Unit)?
 ) : DataBoundListAdapter<Program, AdapterRowItemProgramBinding>(appExecutors,
         diffCallback = object :  DiffUtil.ItemCallback<Program>() {
-            override fun areItemsTheSame(oldItem: Program, newItem: Program): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(oldItem: Program, newItem: Program): Boolean {
-                return oldItem == newItem
-            }
-
+            override fun areItemsTheSame(oldItem: Program, newItem: Program): Boolean = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Program, newItem: Program): Boolean = oldItem == newItem
         }) {
 
     override fun createBinding(parent: ViewGroup): AdapterRowItemProgramBinding {

@@ -9,4 +9,6 @@ object Constants {
     const val BUNDLE_OBJECT_PROGRAM = "bundle_program"
 
     const val BUNDLE_POSITION = "bundle_position"
+
+    val CATEGORY_OPTION = arrayListOf("PDF", "Programs", "Video")
 }
