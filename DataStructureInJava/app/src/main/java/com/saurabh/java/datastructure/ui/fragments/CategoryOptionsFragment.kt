@@ -62,8 +62,12 @@ class CategoryOptionsFragment: BaseFragment(), Injectable {
         dataBinding.recyclerviewFaqs.setHasFixedSize(true)
         adapter = CategoryOptionsAdapter(dataBindingComponent, appExecutors,
                 object : CategoryOptionsAdapter.CategoryOptionsClickCallback{
-                    override fun onClick(data: String , position: Int) {
-                       Timber.i("Saurabh $position = $data")
+                    override fun onClick(data: String, position: Int) {
+                        when(position) {
+                            0 -> {Timber.i("We need to display pdf")}
+                            1 -> {Timber.i("We need to display program")}
+                            2 -> {Timber.i("We need to display video links of youtubes")}
+                        }
                     }
                 })
         dataBinding.recyclerviewFaqs.adapter = adapter
@@ -79,13 +83,12 @@ class CategoryOptionsFragment: BaseFragment(), Injectable {
                 override fun areContentsTheSame(oldItem: String, newItem: String): Boolean = oldItem == newItem
             }) {
         override fun createBinding(parent: ViewGroup): AdapterRowCategoryOptionBinding {
-            val binding = AdapterRowCategoryOptionBinding.inflate(LayoutInflater.from(parent.context),
+            return AdapterRowCategoryOptionBinding.inflate(LayoutInflater.from(parent.context),
                     parent, false, dataBindingComponent)
-            return binding
         }
 
         override fun bind(binding: AdapterRowCategoryOptionBinding, item: String, position: Int) {
-            binding.tvFaqsId.setOnClickListener { callback.onClick(item, position) }
+            binding.tvFaqsId.setOnClickListener {callback.onClick(item, position)}
             binding.data = item
         }
 
