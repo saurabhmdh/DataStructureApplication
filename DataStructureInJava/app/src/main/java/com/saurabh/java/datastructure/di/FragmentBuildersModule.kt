@@ -27,4 +27,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeFavouriteFragment(): FavouriteFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCategoryOptionsFragment(): CategoryOptionsFragment
 }

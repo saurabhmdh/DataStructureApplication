@@ -28,6 +28,12 @@
             android:name="com.saurabh.java.datastructure.ui.activities.QuestionCardActivity"
             android:label="@string/question_card_title"
             android:theme="@style/QuestionCardTheme"/>
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:enabled="false"
+            android:exported="false"
+            tools:replace="android:authorities" />
     </application>
 
 </manifest>

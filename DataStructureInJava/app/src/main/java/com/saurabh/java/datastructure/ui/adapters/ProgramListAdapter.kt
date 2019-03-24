@@ -3,11 +3,10 @@ package com.saurabh.java.datastructure.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.snackbar.Snackbar
 import com.saurabh.java.datastructure.AppExecutors
-import com.saurabh.java.datastructure.R
 import com.saurabh.java.datastructure.bindings.FragmentDataBindingComponent
 import com.saurabh.java.datastructure.constants.Constants
 import com.saurabh.java.datastructure.databinding.AdapterRowItemProgramBinding
@@ -31,10 +30,8 @@ class ProgramListAdapter (private val dataBindingComponent: FragmentDataBindingC
         }) {
 
     override fun createBinding(parent: ViewGroup): AdapterRowItemProgramBinding {
-        val binding = DataBindingUtil
-                .inflate<AdapterRowItemProgramBinding>(LayoutInflater.from(parent.context),
-                        R.layout.adapter_row_item_program, parent, false,
-                        dataBindingComponent)
+        val binding = AdapterRowItemProgramBinding.inflate(LayoutInflater.from(parent.context),
+                parent, false, dataBindingComponent)
         binding.llMainContent.setOnClickListener{
             binding.program?.let {
                 callback?.invoke(it)
@@ -46,12 +43,12 @@ class ProgramListAdapter (private val dataBindingComponent: FragmentDataBindingC
             }
         }
         binding.ivCopy.setOnClickListener {
-            val code = binding?.program?.programCode ?: Constants.EMPTY_STRING
+            val code = binding.program?.programCode ?: Constants.EMPTY_STRING
             Snackbar.make( binding.ivCopy, "Copied to clipboard", Snackbar.LENGTH_SHORT).show()
             Utils.copyToClipboard(parent.context, code)
         }
         binding.ivShare.setOnClickListener {
-            val code = binding?.program?.programCode ?: Constants.EMPTY_STRING
+            val code = binding.program?.programCode ?: Constants.EMPTY_STRING
             Utils.shareCodesViaApps(parent.context, code)
         }
         return binding

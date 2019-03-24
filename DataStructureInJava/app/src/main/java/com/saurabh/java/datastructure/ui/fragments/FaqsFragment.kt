@@ -24,9 +24,9 @@ import javax.inject.Inject
 
 class FaqsFragment : BaseFragment(), Injectable {
 
-
     private val dataBindingComponent = FragmentDataBindingComponent(this)
     var dataBinding by autoCleared<FragmentFaqsBinding>()
+
     private var adapter by autoCleared<FAQsListAdapter>()
     private lateinit var faqVM : FAQViewModel
     @Inject

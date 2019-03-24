@@ -25,7 +25,7 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_navigate_program"
-            app:destination="@id/navigation_fragment_program"
+            app:destination="@id/navigation_category_options"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -78,10 +78,20 @@
         <argument android:name="bundle_program" app:argType="com.saurabh.java.datastructure.db.tables.Program" />
     </fragment>
 
+    <!-- This is temporary code -->
     <fragment
         android:id="@+id/navigation_fragment_pdf"
         android:name="com.saurabh.java.datastructure.ui.fragments.PdfRendererBasicFragment"
         android:label="@string/faq"
         tools:layout="@layout/fragment_pdf_renderer_basic">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_category_options"
+        android:name="com.saurabh.java.datastructure.ui.fragments.CategoryOptionsFragment"
+        tools:layout="@layout/fragment_faqs">
+        <argument android:name="bundle_object" app:argType="com.saurabh.java.datastructure.vo.Category" />
+        <argument android:name="bundle_id" app:argType="integer" />
+
     </fragment>
 </navigation>

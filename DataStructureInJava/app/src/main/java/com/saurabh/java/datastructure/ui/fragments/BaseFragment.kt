@@ -16,10 +16,6 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    open fun pushFragment(fragment: Fragment) {
-        //iFragmentLifeCycleEvent?.pushFragment(fragment)
-    }
-
     abstract fun getTitle() : ActionbarItem
 
     override fun onResume() {

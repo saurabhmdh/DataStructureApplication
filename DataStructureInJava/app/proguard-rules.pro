@@ -23,3 +23,26 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#OKHTTPS
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *; }
+-keep interface com.squareup.okhttp3.* { *; }
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+-keepattributes Signature
+-keepattributes Annotation
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-keep class okhttp3.Headers { *; }
+
+
+-dontwarn android.arch.lifecycle.LifecycleProcessor
+-dontwarn retrofit2.**
+
+-keep class com.saurabh.java.datastructure.vo.** { *; }
+-keep class com.saurabh.java.datastructure.db.tables.** { *; }
+-keep class * extends androidx.fragment.app.Fragment
